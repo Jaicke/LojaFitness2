@@ -1,19 +1,19 @@
 package negocio;
 
-public class Cliente extends Usuario {
+public class Cliente extends Pessoa {
 
-    private String nome;
-    private String cpf;
-    private String email;
-    private String telefone;
     private String dataNascimento;
+    private String cpf;
+    private String rg;
+    private String celular;
+    private String email;
 
-    public String getNome() {
-        return nome;
+    public String getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getCpf() {
@@ -24,6 +24,22 @@ public class Cliente extends Usuario {
         this.cpf = cpf;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -31,21 +47,7 @@ public class Cliente extends Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    
+    
 
 }
