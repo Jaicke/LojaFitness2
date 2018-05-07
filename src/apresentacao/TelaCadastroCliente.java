@@ -95,7 +95,7 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         jLabel8.setText("CEP");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
         jPanel1.add(txtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 100, -1));
 

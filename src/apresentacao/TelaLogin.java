@@ -111,13 +111,14 @@ public class TelaLogin extends javax.swing.JDialog {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         if (cbxTipo.getSelectedItem().toString().equals("Administrador") && validarLogin()) {
+            dispose();
             TelaPrincipalAdm tela = new TelaPrincipalAdm();
             tela.setVisible(true);
-            dispose();
-        } else if(cbxTipo.getSelectedItem().toString().equals("Cliente") && validarLogin()) {
             
-            new TelaPrincipalCliente().setVisible(true);
+        } else if(cbxTipo.getSelectedItem().toString().equals("Cliente") && validarLogin()) {
             dispose();
+            new TelaPrincipalCliente().setVisible(true);
+            
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

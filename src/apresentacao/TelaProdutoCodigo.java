@@ -7,14 +7,15 @@ package apresentacao;
 
 /**
  *
- * @author lukas
+ * @author EDVALDO
  */
-public class TelaProdutoCodigo extends javax.swing.JFrame {
+public class TelaProdutoCodigo extends javax.swing.JDialog {
 
     /**
      * Creates new form TelaProdutoCodigo
      */
-    public TelaProdutoCodigo() {
+    public TelaProdutoCodigo(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -32,7 +33,7 @@ public class TelaProdutoCodigo extends javax.swing.JFrame {
         btnBuscarProduto = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Buscar Codigo do Produto:");
 
@@ -54,7 +55,7 @@ public class TelaProdutoCodigo extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBuscarProduto)
@@ -73,7 +74,7 @@ public class TelaProdutoCodigo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarProduto)
                     .addComponent(btnSair))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,10 +111,17 @@ public class TelaProdutoCodigo extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaProdutoCodigo().setVisible(true);
+                TelaProdutoCodigo dialog = new TelaProdutoCodigo(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
