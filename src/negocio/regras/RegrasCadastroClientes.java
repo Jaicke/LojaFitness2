@@ -3,6 +3,7 @@ package negocio.regras;
 import negocio.Cliente;
 import negocio.LoginCadastroException;
 
+
 public class RegrasCadastroClientes extends Cliente {
 
     public void ValidarCadastroCliente() throws LoginCadastroException {
