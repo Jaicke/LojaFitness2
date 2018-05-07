@@ -1,17 +1,16 @@
 package negocio;
 
 public abstract class Pessoa {
+
     private Integer id;
-    private String nome;       
+    private String nome;
     private String rua;
     private String complemento;
     private String bairro;
     private String cidade;
     private String uf;
-    private String cep;    
+    private String cep;
     private String telefone;
-    private String usuario;
-    private String senha;
 
     public Integer getId() {
         return id;
@@ -85,24 +84,4 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }    
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
-    
-    
-    
-    
 }
