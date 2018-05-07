@@ -7,14 +7,15 @@ package apresentacao;
 
 /**
  *
- * @author lukas
+ * @author EDVALDO
  */
-public class TelaConfirmarProduto extends javax.swing.JFrame {
+public class TelaConfirmarProduto extends javax.swing.JDialog {
 
     /**
      * Creates new form TelaConfirmarProduto
      */
-    public TelaConfirmarProduto() {
+    public TelaConfirmarProduto(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -42,7 +43,7 @@ public class TelaConfirmarProduto extends javax.swing.JFrame {
         btnSalvarProduto = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Código:");
 
@@ -173,10 +174,17 @@ public class TelaConfirmarProduto extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaConfirmarProduto().setVisible(true);
+                TelaConfirmarProduto dialog = new TelaConfirmarProduto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

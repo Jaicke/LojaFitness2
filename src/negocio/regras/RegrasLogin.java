@@ -9,6 +9,8 @@ public class RegrasLogin extends Usuario {
 
         if (getUsuario().equals("") || getSenha().equals("")) {
             throw new LoginCadastroException();
+            
         }
+        
     }
 }

@@ -7,14 +7,15 @@ package apresentacao;
 
 /**
  *
- * @author lukas
+ * @author EDVALDO
  */
-public class TelaTabelaCompra extends javax.swing.JFrame {
+public class TelaTabelaCompra extends javax.swing.JDialog {
 
     /**
      * Creates new form TelaTabelaCompra
      */
-    public TelaTabelaCompra() {
+    public TelaTabelaCompra(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -34,7 +35,7 @@ public class TelaTabelaCompra extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         btnPesquisa = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,7 +73,7 @@ public class TelaTabelaCompra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -94,7 +95,7 @@ public class TelaTabelaCompra extends javax.swing.JFrame {
                     .addComponent(btnPesquisa)
                     .addComponent(btnSair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,10 +132,17 @@ public class TelaTabelaCompra extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaTabelaCompra().setVisible(true);
+                TelaTabelaCompra dialog = new TelaTabelaCompra(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

@@ -50,14 +50,14 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         telaRelatorioCompras = new javax.swing.JInternalFrame();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblComprasRealizadas = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        btnFechar = new javax.swing.JButton();
+        tblProdutosComprados = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        btnFecha = new javax.swing.JButton();
         menuBarra = new javax.swing.JMenuBar();
         menuLoja = new javax.swing.JMenu();
         mnItemComprar = new javax.swing.JMenuItem();
@@ -117,6 +117,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         });
 
         btnSalvarPedido.setText("SALVAR PEDIDO");
+        btnSalvarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarPedidoActionPerformed(evt);
+            }
+        });
 
         btnFinalizarCompra.setText("FINALIZAR COMPRA");
         btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -204,10 +209,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirProduto))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExcluirProduto)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -230,9 +236,10 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         telaRelatorioCompras.setTitle("Relatorio de Compras");
         telaRelatorioCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         telaRelatorioCompras.setVisible(false);
-        telaRelatorioCompras.getContentPane().setLayout(new javax.swing.OverlayLayout(telaRelatorioCompras.getContentPane()));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setText("Compras Realizadas");
+
+        tblComprasRealizadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -243,13 +250,9 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                 "Nº", "Valor", "Data"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblComprasRealizadas);
 
-        jLabel1.setText("Compras Realizadas");
-
-        jLabel2.setText("Produtos Comprados");
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutosComprados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -268,54 +271,68 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblProdutosComprados);
 
-        btnFechar.setText("SAIR");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Produtos Comprados");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel1)
+                        .addGap(397, 397, 397)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        btnFecha.setText("Sair");
+        btnFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
+                btnFechaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(61, 61, 61)
-                .addComponent(btnFechar)
-                .addGap(27, 27, 27))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 344, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        javax.swing.GroupLayout telaRelatorioComprasLayout = new javax.swing.GroupLayout(telaRelatorioCompras.getContentPane());
+        telaRelatorioCompras.getContentPane().setLayout(telaRelatorioComprasLayout);
+        telaRelatorioComprasLayout.setHorizontalGroup(
+            telaRelatorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(telaRelatorioComprasLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFecha)
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(btnFechar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(37, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+        telaRelatorioComprasLayout.setVerticalGroup(
+            telaRelatorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(telaRelatorioComprasLayout.createSequentialGroup()
+                .addGroup(telaRelatorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(telaRelatorioComprasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnFecha)))
+                .addContainerGap())
         );
-
-        telaRelatorioCompras.getContentPane().add(jPanel2);
 
         getContentPane().add(telaRelatorioCompras);
 
@@ -366,9 +383,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         setJMenuBar(menuBarra);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnItemComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemComprarActionPerformed
+        telaRelatorioCompras.setVisible(false);
         telaDeCompras.setVisible(true);
     }//GEN-LAST:event_mnItemComprarActionPerformed
 
@@ -386,15 +405,13 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_mnItemSairActionPerformed
 
     private void mnItemRelatorioComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemRelatorioComprasActionPerformed
+        telaDeCompras.setVisible(false);
         telaRelatorioCompras.setVisible(true);
     }//GEN-LAST:event_mnItemRelatorioComprasActionPerformed
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-       telaRelatorioCompras.dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
-
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
-        new TelaTabelaCompra().setVisible(true);
+        TelaTabelaCompra tela = new TelaTabelaCompra(this, true);
+        tela.setVisible(true);
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
@@ -408,12 +425,22 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
 
     private void btnAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoActionPerformed
-        new TelaProdutoCodigo().setVisible(true);
+        TelaProdutoCodigo tela = new TelaProdutoCodigo(this, true);
+        tela.setVisible(true);
     }//GEN-LAST:event_btnAutoActionPerformed
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        new TelaFinalizacaoCompra().setVisible(true);
+        new TelaFinalizacaoCompra().setVisible(true);        
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
+
+    private void btnFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaActionPerformed
+        telaRelatorioCompras.dispose();
+    }//GEN-LAST:event_btnFechaActionPerformed
+
+    private void btnSalvarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPedidoActionPerformed
+        TelaConfirmarProduto tela = new TelaConfirmarProduto(this, true);
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnSalvarPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,7 +481,7 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnAuto;
     private javax.swing.JButton btnExcluirProduto;
-    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnFecha;
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarPedido;
@@ -466,13 +493,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -486,6 +511,8 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnItemRelatorioCompras;
     private javax.swing.JMenuItem mnItemSair;
     private javax.swing.JMenuItem mnItemSobre;
+    private javax.swing.JTable tblComprasRealizadas;
+    private javax.swing.JTable tblProdutosComprados;
     private javax.swing.JInternalFrame telaDeCompras;
     private javax.swing.JInternalFrame telaRelatorioCompras;
     // End of variables declaration//GEN-END:variables

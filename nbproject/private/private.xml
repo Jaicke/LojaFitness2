@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalCliente.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaConfirmarProduto.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaTabelaCompra.java</file>
@@ -14,6 +15,14 @@
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaFinalizacaoCompra.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroFornecedor.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPagamentoParcela.java</file>
+=======
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Fornecedor.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaCadastroCliente.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaLogin.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Pessoa.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaCadastroFornecedor.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Cliente.java</file>
+>>>>>>> 820ece875eb1d54e419a2bf2a8dfb78cbddb8529
         </group>
     </open-files>
 </project-private>
