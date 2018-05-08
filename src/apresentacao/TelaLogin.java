@@ -6,7 +6,9 @@
 package apresentacao;
 
 import javax.swing.JOptionPane;
-
+import negocio.Login;
+import negocio.excecoes.LoginException;
+import negocio.regras.RegraLogin;
 
 /**
  *
@@ -20,20 +22,6 @@ public class TelaLogin extends javax.swing.JDialog {
     public TelaLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-
-    private boolean validarLogin() {
-        if(!(txtUsuario.getText().length() > 0)){
-            JOptionPane.showMessageDialog(null,"Informe Usuário");
-            txtUsuario.requestFocus();
-            return false;
-        }
-        if(!(txtSenha.getText().length() > 0)){
-            JOptionPane.showMessageDialog(null, "Informe Senha");
-            txtSenha.requestFocus();
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -111,16 +99,30 @@ public class TelaLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        RegraLogin regra = new RegraLogin();
+        Login login = new Login();
+        login.setUsuario(txtUsuario.getText());
+        login.setSenha(txtSenha.getText());
 
-        if (cbxTipo.getSelectedItem().toString().equals("Administrador") && validarLogin()) {
-            dispose();
-            TelaPrincipalAdm tela = new TelaPrincipalAdm();
-            tela.setVisible(true);
-            
-        } else if(cbxTipo.getSelectedItem().toString().equals("Cliente") && validarLogin()) {
-            dispose();
-            new TelaPrincipalCliente().setVisible(true);
-            
+        if (cbxTipo.getSelectedItem().toString().equals("Administrador")) {
+            try {
+                regra.efetuarLogin(login);
+                dispose();
+                TelaPrincipalAdm tela = new TelaPrincipalAdm();
+                tela.setVisible(true);
+            } catch (LoginException e) {
+                JOptionPane.showMessageDialog(null, "Senha ou Login Inválido");
+            }
+
+        } else if (cbxTipo.getSelectedItem().toString().equals("Cliente")) {
+            try{
+                regra.efetuarLogin(login);
+                dispose();
+                new TelaPrincipalCliente().setVisible(true);
+            }catch(LoginException e){
+                JOptionPane.showMessageDialog(null, "Senha ou Login Inválido");
+            }
+
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

@@ -1,4 +1,4 @@
-package negocio;
+package negocio.excecoes;
 
 public class LoginCadastroException extends Exception {
 

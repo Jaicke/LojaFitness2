@@ -9,6 +9,7 @@ import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import negocio.regras.RegraCadastroProduto;
 
 /**
  *
@@ -34,24 +35,20 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         btnSalvarProduto.setEnabled(editando);
         btnEditarProduto.setEnabled(!editando);
         btnExcluirProduto.setEnabled(!editando);
-        btnAddProduto.setEnabled(!editando);
-        estoqueAtual.setEditable(editando);
-        cbxMarca.setEditable(editando);
-        cbxCategoria.setEditable(editando);
+        btnAddProduto.setEnabled(!editando);        
+        cbxMarca.setEnabled(editando);
+        cbxCategoria.setEnabled(editando);
         tblProdutos.setEnabled(!editando);
+        txtNome.setEditable(editando);
+        txtDesconto.setEditable(editando);
+        txtEstoqueMin.setEditable(editando);
+        txtTotal.setEditable(editando);
+        txtValor.setEditable(editando);
+        txtQuantidade.setEditable(editando);
 
     }
 
-    public boolean validarCampos() {
-
-        if (!(estoqueAtual.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe o nome da cidade");
-            estoqueAtual.requestFocus();
-            return false;
-        }
-
-        return true;
-    }
+    
 
     /**
      * Creates new form TelaAdm
@@ -100,7 +97,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         tblFuncionarios = new javax.swing.JTable();
         addProduto = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        abas = new javax.swing.JTabbedPane();
         abaListagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
@@ -115,7 +112,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         cbxCategoria = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         txtEstoqueMin = new javax.swing.JTextField();
-        estoqueAtual = new javax.swing.JTextField();
+        txtEstoqueAtual = new javax.swing.JTextField();
         cbxMarca = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -304,10 +301,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         columnBinding.setColumnName("Categoria");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidade}"));
-        columnBinding.setColumnName("Quantidade");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${estoqueMinimo}"));
         columnBinding.setColumnName("Estoque Minimo");
         columnBinding.setColumnClass(Integer.class);
@@ -343,7 +336,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Listagem", abaListagem);
+        abas.addTab("Listagem", abaListagem);
 
         jLabel6.setText("Código");
 
@@ -373,7 +366,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.estoqueMinimo}"), txtEstoqueMin, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.estoqueAtual}"), estoqueAtual, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        txtEstoqueAtual.setEditable(false);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.estoqueAtual}"), txtEstoqueAtual, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         cbxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adidas", "Nike", "Oxer", "Integral Médica", "Probiótica" }));
@@ -407,8 +402,14 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.quantidade}"), txtQuantidade, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantidadeActionPerformed(evt);
+            }
+        });
+
         Acoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
-        Acoes.setLayout(new java.awt.GridLayout());
+        Acoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAddProduto.setText("Adicionar");
         btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -456,56 +457,66 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Acoes, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
             .addGroup(abaCadastrarLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6)
                     .addGroup(abaCadastrarLayout.createSequentialGroup()
-                        .addComponent(cbxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5)
-                    .addGroup(abaCadastrarLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel8))
-                    .addGroup(abaCadastrarLayout.createSequentialGroup()
-                        .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
                         .addGap(10, 10, 10)
-                        .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(estoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
                             .addGroup(abaCadastrarLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel1))
+                                .addComponent(cbxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5)
                             .addGroup(abaCadastrarLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel2))
+                                .addComponent(jLabel7)
+                                .addGap(125, 125, 125)
+                                .addComponent(jLabel8))
                             .addGroup(abaCadastrarLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel11)))
-                        .addGap(18, 18, 18)
-                        .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel9))
+                                .addGap(10, 10, 10)
+                                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(abaCadastrarLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel1))
+                                    .addGroup(abaCadastrarLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel2))
+                                    .addGroup(abaCadastrarLayout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel11)))
+                                .addGap(18, 18, 18)
+                                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(abaCadastrarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10))
+                    .addGroup(abaCadastrarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtEstoqueAtual, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCadastrarLayout.setVerticalGroup(
             abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastrarLayout.createSequentialGroup()
                 .addComponent(Acoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addGap(2, 2, 2)
+                .addComponent(txtEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(6, 6, 6)
@@ -537,31 +548,25 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                             .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
                                 .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(6, 6, 6)
-                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(estoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(abaCadastrarLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel11)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(9, 9, 9)
+                .addGroup(abaCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Cadastrar", abaCadastrar);
+        abas.addTab("Cadastrar", abaCadastrar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(abas)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -641,11 +646,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnItemFornecedorActionPerformed
 
     private void btnAdicionaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaClienteActionPerformed
-        listaObjetos.add((Produto) new Produto());
-        int linha = listaObjetos.size() - 1;
-        tblProdutos.setRowSelectionInterval(linha, linha);
-        trataEdicao(true);
-        estoqueAtual.requestFocus();
+        TelaCadastroCliente tela = new TelaCadastroCliente(this, true);
+        tela.setVisible(true);
 
     }//GEN-LAST:event_btnAdicionaClienteActionPerformed
 
@@ -669,13 +671,15 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaiFornecedorActionPerformed
 
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
-        if (validarCampos()) {
+            RegraCadastroProduto regra = new RegraCadastroProduto();
             int linhaSelecionada = tblProdutos.getSelectedRow();
             Produto obj = listaObjetos.get(linhaSelecionada);
+            regra.somaEstoque(obj);
             produto.salvar(obj);
             trataEdicao(false);
             atualizaTabela();
-        }
+            
+        
     }//GEN-LAST:event_btnSalvarProdutoActionPerformed
 
     private void cbxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMarcaActionPerformed
@@ -699,7 +703,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Sim", "Não"}, "Sim");
         if (opcao == 0) {
-            int linhaSelecionada = tblProdutos.getSelectedRow();
+            int linhaSelecionada = tblProdutos.getSelectedRow();            
             Produto obj = listaObjetos.get(linhaSelecionada);
             produto.remover(obj);
             atualizaTabela();
@@ -715,6 +719,10 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         trataEdicao(false);
         atualizaTabela();
     }//GEN-LAST:event_btnCancelarCadastroProdActionPerformed
+
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -766,6 +774,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JMenu MenuProduto;
     private javax.swing.JPanel abaCadastrar;
     private javax.swing.JPanel abaListagem;
+    private javax.swing.JTabbedPane abas;
     private javax.swing.JInternalFrame addCliente;
     private javax.swing.JInternalFrame addFornecedor;
     private javax.swing.JInternalFrame addProduto;
@@ -786,7 +795,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvarProduto;
     private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxMarca;
-    private javax.swing.JTextField estoqueAtual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -801,7 +809,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private java.util.List<Produto> listaObjetos;
     private javax.swing.JMenuItem mnItemCliente;
     private javax.swing.JMenuItem mnItemFornecedor;
@@ -821,6 +828,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JTextField txtBarraPesquisaFornecedor;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDesconto;
+    private javax.swing.JTextField txtEstoqueAtual;
     private javax.swing.JTextField txtEstoqueMin;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtQuantidade;

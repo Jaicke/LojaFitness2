@@ -65,7 +65,7 @@ public class Produto {
         return estoqueAtual;
     }
 
-    public void setEstoqueAtual(int estoqueAtual) {
+    public void setEstoqueAtual(int estoqueAtual ) {
         this.estoqueAtual = estoqueAtual;
     }
 
