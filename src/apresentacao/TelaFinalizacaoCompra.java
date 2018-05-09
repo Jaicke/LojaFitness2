@@ -32,7 +32,7 @@ public class TelaFinalizacaoCompra extends javax.swing.JFrame {
         btnPagamentoAvista = new javax.swing.JButton();
         btnPagamentoParcela = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Forma de Pagamento");
 
