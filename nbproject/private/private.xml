@@ -2,6 +2,48 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Compra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaTabelaCompra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroCliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaProdutoCodigo.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Cliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaFinalizacaoCompra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroFornecedor.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalCliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaConfirmarProduto.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Login.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Usuario.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/LoginCadastroException.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaLogin.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalAdm.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroProduto.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Administrador.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPagamentoParcela.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Produto.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaPagamentoParcela.java</file>
+        </group>
         <group/>
     </open-files>
 </project-private>
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Fornecedor.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaCadastroCliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalCliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaConfirmarProduto.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaTabelaCompra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaLogin.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroCliente.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalAdm.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroProduto.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaProdutoCodigo.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaFinalizacaoCompra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaCadastroFornecedor.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPagamentoParcela.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaLogin.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Pessoa.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Cliente.java</file>
