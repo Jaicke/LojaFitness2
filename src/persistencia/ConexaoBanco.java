@@ -1,18 +1,19 @@
-package negocio;
+package persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Conexao {
+public class ConexaoBanco {
+
     private static final String banco = "jdbc:mysql://localhost:3306/mydb";
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String usuario = "root";
     private static final String senha = "";
     private static Connection con = null;
 
-    public Conexao(){
+    public ConexaoBanco() {
 
     }
 
@@ -30,7 +31,7 @@ public class Conexao {
         return con;
     }
     
-    public static PreparedStatement getPreparedStatement(String sql) {
+    public static PreparedStatement getPreparedStatement(String sql) throws SQLException {
         if (con == null) {
             con = getConexao();
         }
@@ -41,4 +42,6 @@ public class Conexao {
         }
         return null;
     }
+    
+
 }

@@ -5,7 +5,10 @@
  */
 package apresentacao;
 
+import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import negocio.Login;
 import negocio.excecoes.LoginException;
 import negocio.regras.RegraLogin;
@@ -111,7 +114,10 @@ public class TelaLogin extends javax.swing.JDialog {
                 TelaPrincipalAdm tela = new TelaPrincipalAdm();
                 tela.setVisible(true);
             } catch (LoginException e) {
-                JOptionPane.showMessageDialog(null, "Senha ou Login Inválido");
+                JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválido ");
+                txtUsuario.setBorder(new LineBorder(Color.red));
+                txtSenha.setBorder(new LineBorder(Color.red));
+                txtUsuario.requestFocus();
             }
 
         } else if (cbxTipo.getSelectedItem().toString().equals("Cliente")) {
@@ -120,7 +126,7 @@ public class TelaLogin extends javax.swing.JDialog {
                 dispose();
                 new TelaPrincipalCliente().setVisible(true);
             }catch(LoginException e){
-                JOptionPane.showMessageDialog(null, "Senha ou Login Inválido");
+                JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválido");
             }
 
         }

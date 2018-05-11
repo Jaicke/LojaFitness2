@@ -7,8 +7,7 @@ public class Cliente extends Pessoa {
     private String rg;
     private String celular;
     private String email;
-    private String usuario;
-    private String senha;
+    
 
     public String getDataNascimento() {
         return dataNascimento;
@@ -50,21 +49,7 @@ public class Cliente extends Pessoa {
         this.email = email;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    
     
     
     

@@ -5,9 +5,12 @@
  */
 package apresentacao;
 
+import java.sql.SQLException;
 import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.regras.RegraCadastroProduto;
 
@@ -19,7 +22,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     RepositorioProduto produto = new RepositorioProduto();
 
-    public void atualizaTabela() {
+    public void atualizaTabela(){
         listaObjetos.clear();
         listaObjetos.addAll(produto.getLista());
         int linha = listaObjetos.size() - 1;
@@ -186,9 +189,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         mnItemFornecedor = new javax.swing.JMenuItem();
         MenuProduto = new javax.swing.JMenu();
         mnItemProduto = new javax.swing.JMenuItem();
+        mnItemSair = new javax.swing.JMenu();
         MenuAjuda = new javax.swing.JMenu();
         mnItemSobre = new javax.swing.JMenuItem();
-        mnItemSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
@@ -226,7 +229,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         jTabbedPane1.addTab("Listagem", abaListagemCliente);
 
         acoesCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
-        acoesCliente.setLayout(new java.awt.GridLayout());
+        acoesCliente.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAddCliente.setText("Adicionar");
         acoesCliente.add(btnAddCliente);
@@ -455,7 +458,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         abasFornecedor.addTab("Listagem", abaListagemFornecedor);
 
         acoesFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Acões"));
-        acoesFornecedor.setLayout(new java.awt.GridLayout());
+        acoesFornecedor.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton1.setText("Adicionar");
         acoesFornecedor.add(jButton1);
@@ -814,24 +817,21 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                                 .addComponent(jLabel8))
                             .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
                                 .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel9))
+                                .addGap(10, 10, 10)
+                                .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
-                                        .addGap(181, 181, 181)
-                                        .addComponent(jLabel1))
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel11))
                                     .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
-                                        .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel9))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
-                                                .addGap(34, 34, 34)
-                                                .addComponent(jLabel2))
-                                            .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
-                                                .addGap(33, 33, 33)
-                                                .addComponent(jLabel11)))))
+                                        .addGap(34, 34, 34)
+                                        .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2))))
                                 .addGap(18, 18, 18)
                                 .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                     .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -872,11 +872,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(cbxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
-                .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel1))
                 .addGap(9, 9, 9)
                 .addGroup(abaCadastrarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(abaCadastrarProdutoLayout.createSequentialGroup()
@@ -953,18 +951,18 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         MenuBarra.add(MenuProduto);
 
+        mnItemSair.setText("Sair");
+        mnItemSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnItemSairMouseClicked(evt);
+            }
+        });
+        MenuBarra.add(mnItemSair);
+
         MenuAjuda.setText("Ajuda");
 
         mnItemSobre.setText("Sobre");
         MenuAjuda.add(mnItemSobre);
-
-        mnItemSair.setText("Sair");
-        mnItemSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnItemSairActionPerformed(evt);
-            }
-        });
-        MenuAjuda.add(mnItemSair);
 
         MenuBarra.add(MenuAjuda);
 
@@ -975,10 +973,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mnItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemSairActionPerformed
-        dispose();
-    }//GEN-LAST:event_mnItemSairActionPerformed
 
     private void mnItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemClienteActionPerformed
         addCliente.setVisible(true);
@@ -1003,7 +997,11 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             int linhaSelecionada = tblProdutos.getSelectedRow();
             Produto obj = listaObjetos.get(linhaSelecionada);
             regra.somaEstoque(obj);
-            produto.salvar(obj);
+        try {
+            produto.salvarProduto(obj);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro");
+        }
             trataEdicao(false);
             atualizaTabela();
             
@@ -1033,7 +1031,11 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         if (opcao == 0) {
             int linhaSelecionada = tblProdutos.getSelectedRow();            
             Produto obj = listaObjetos.get(linhaSelecionada);
-            produto.remover(obj);
+            try {
+                produto.removerProduto(obj);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro");
+            }
             atualizaTabela();
         }
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
@@ -1059,6 +1061,12 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private void txtCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCnpjActionPerformed
+
+    private void mnItemSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnItemSairMouseClicked
+        dispose();
+        TelaLogin tela = new TelaLogin(this, true);
+        tela.setVisible(true);
+    }//GEN-LAST:event_mnItemSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1187,7 +1195,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnItemCliente;
     private javax.swing.JMenuItem mnItemFornecedor;
     private javax.swing.JMenuItem mnItemProduto;
-    private javax.swing.JMenuItem mnItemSair;
+    private javax.swing.JMenu mnItemSair;
     private javax.swing.JMenuItem mnItemSobre;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblProdutos;
