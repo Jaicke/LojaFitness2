@@ -147,3 +147,8 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+insert into produto (nome,marca, categoria,quantidade,estoqueMininmo,estoqueAtual,valor,desconto,valorTotal)
+                    values('Bermuda Nike Dry','Nike','Masculino','20','10','20','74.99','0.05','71.21'),
+                          ('Camiseta Regata Nike Legend','Nike','20','10','20','69.99','0.05','66.50');

@@ -122,6 +122,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         } else if (cbxTipo.getSelectedItem().toString().equals("Cliente")) {
             try{
+                login.setAdm(false);
                 regra.efetuarLogin(login);
                 dispose();
                 new TelaPrincipalCliente().setVisible(true);

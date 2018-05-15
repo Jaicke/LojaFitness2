@@ -14,23 +14,23 @@ import negocio.Cliente;
  */
 public class RepositorioCliente {
     
-     public List<Cliente> getList(){
+     /*public List<Cliente> getList(){
         return Dados.listaCliente;
         
     }
     
     public boolean salvar(Cliente obj){
         if(obj.getId()== null){
-            int codigo = Dados.listaCliente.size() + 1;
-            obj.setId(codigo);
-            Dados.listaCliente.add(obj);
+            //int codigo = Dados.listaCliente.size() + 1;
+            //obj.setId(codigo);
+            //Dados.listaCliente.add(obj);
         }
         return true;
     }
     
     public boolean remover(Cliente obj){
-        Dados.listaCliente.remove(obj);
+        //Dados.listaCliente.remove(obj);
         return true;
-    }
+    }*/
    
 }

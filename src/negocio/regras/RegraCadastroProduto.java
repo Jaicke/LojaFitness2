@@ -6,14 +6,24 @@
 package negocio.regras;
 
 import negocio.Produto;
+import negocio.excecoes.CadastroProdutoException;
 
 /**
  *
  * @author EDVALDO
  */
 public class RegraCadastroProduto {
-    
-    public void somaEstoque(Produto produto){
+
+    public void somaEstoque(Produto produto) {
         produto.setEstoqueAtual(produto.getEstoqueAtual() + produto.getQuantidade());
     }
+
+    public void calculaValorTotal(Produto produto) {
+        if (!(produto.getDesconto() == 0)) {
+            produto.setValorTotal(produto.getValor() - (produto.getDesconto() * produto.getValor()));//Calulo de desconto
+        }else{
+            produto.setValorTotal(produto.getValor());//caso o desconto seja zero, considerar o valor base
+        }
+    }   
+    
 }
