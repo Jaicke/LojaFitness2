@@ -12,6 +12,7 @@ package negocio;
 public class Login {
     private String usuario;
     private String senha;
+    private boolean Adm;//atributo para verificar se é adm
     
 
     public String getUsuario() {
@@ -28,6 +29,14 @@ public class Login {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean isAdm() {
+        return Adm;
+    }
+
+    public void setAdm(boolean isAdm) {
+        this.Adm = isAdm;
     }
     
     

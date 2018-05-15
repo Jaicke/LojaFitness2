@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`produto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`produto` (
-  `codigo` INT NOT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   `marca` VARCHAR(45) NULL,
   `categoria` VARCHAR(45) NULL,
@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`pessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`pessoa` (
-  `idPessoa` INT NOT NULL,
+  `idPessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   `rua` VARCHAR(45) NULL,
   `complemento` VARCHAR(45) NULL,
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`cliente` (
-  `idCliente` INT NOT NULL,
+  `idCliente` INT NOT NULL AUTO_INCREMENT,
   `dataNascimento` VARCHAR(9) NULL,
   `cpf` VARCHAR(12) NULL,
   `rg` VARCHAR(9) NULL,
@@ -69,7 +69,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`fornecedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`fornecedor` (
-  `idFornecedor` INT NOT NULL,
+  `idFornecedor` INT NOT NULL AUTO_INCREMENT,
   `cnpj` VARCHAR(45) NULL,
   `nomeRepresentante` VARCHAR(45) NULL,
   `celularRepresentante` VARCHAR(13) NULL,

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class ConexaoBanco {
 
@@ -17,20 +18,20 @@ public class ConexaoBanco {
 
     }
 
-    public static Connection getConexao() {
+    public static Connection getConexao(){
         if (con == null) {
             try {
-                Class.forName(driver);
                 con = DriverManager.getConnection(banco, usuario, senha);
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Não encontrou o driver: " + ex.getMessage());
+                
             } catch (SQLException ex) {
-                System.out.println("Erro na conexão: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
             }
+            
         }
         return con;
+        
     }
-    
+
     public static PreparedStatement getPreparedStatement(String sql) throws SQLException {
         if (con == null) {
             con = getConexao();
@@ -38,10 +39,9 @@ public class ConexaoBanco {
         try {
             return con.prepareStatement(sql);
         } catch (SQLException ex) {
-            System.out.println("Erro de SQL: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + ex.getMessage());
         }
         return null;
     }
-    
 
 }

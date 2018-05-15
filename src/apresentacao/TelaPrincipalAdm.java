@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.regras.RegraCadastroProduto;
 
