@@ -10,7 +10,7 @@ public abstract class Pessoa {
     private String cidade;
     private String uf;
     private String cep;
-    private String telefone;
+    private String celular;
 
     public Integer getId() {
         return id;
@@ -76,12 +76,12 @@ public abstract class Pessoa {
         this.cep = cep;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
 }

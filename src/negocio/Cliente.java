@@ -4,8 +4,7 @@ public class Cliente extends Pessoa {
 
     private String dataNascimento;
     private String cpf;
-    private String rg;
-    private String celular;
+    private String rg;    
     private String email;
     
 
@@ -31,15 +30,7 @@ public class Cliente extends Pessoa {
 
     public void setRg(String rg) {
         this.rg = rg;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
+    }   
 
     public String getEmail() {
         return email;
