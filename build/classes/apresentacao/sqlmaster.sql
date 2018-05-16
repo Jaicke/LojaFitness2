@@ -150,5 +150,13 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 insert into produto (nome,marca, categoria,quantidade,estoqueMininmo,estoqueAtual,valor,desconto,valorTotal)
-                    values('Bermuda Nike Dry','Nike','Masculino','20','10','20','74.99','0.05','71.21'),
-                          ('Camiseta Regata Nike Legend','Nike','20','10','20','69.99','0.05','66.50');
+                    values('Bermuda Nike Dry','Nike','Masculino','20','10','20','74.99','5','71.21'),
+                          ('Camiseta Regata Nike Legend','Nike','Masculino','20','10','20','69.99','5','66.50'),
+                          ('Tênis Nike DownShifter 7','Nike','Masculino','20','10','20','189.99','5','180.50'),
+                          ('Calça Legging Oxer Jogging','Oxer', 'Feminino','20','10','20','39.99','5','38'),
+                          ('Camiseta Oxer Cord II','Oxer','Feminino', '20','10','20','29.99','5','28.50' ),
+                          ('Tênis Oxer Agill','Oxer','Feminino', '20','10','20', '59.99', '5', '56.99'),
+                          ('Creatina Integralmedica - 300g', 'Integralmedica', 'Suplemento', '20','10','20','37.90', '2','37.15'),
+                          ('Whey Protein Integralmediga nutri - Chocolate - 1.8Kg','Integralmedica','Suplemento', '20','10','20','79.85','3','77.45'),
+                          ('Pré Treino BodyAction - Uva com Blueberry - 100g','Integralmedica','Suplemento','20','10','20','50','3','48.50'),
+                          ('Energético - Sabor Guaraná e Açaí','Porbiótica','Suplemento','20','10','20','3','0','3' );

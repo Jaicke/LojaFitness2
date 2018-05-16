@@ -90,8 +90,8 @@ public class RepositorioProduto implements iRepositorioProduto {
 
     @Override
     public boolean editarProduto(Produto produto) throws SQLException {
-        String sql = "update produto set nome = ?, marca = ?, categoria = ?, quantidade = ?"
-                + "estoqueAtual = ?, estoqueMinimo = ?, valor = ?, desconto = ?, valorTotal - ? ";
+        String sql = "update produto set nome = ?, marca = ?, categoria = ?, quantidade = ?, estoqueMinimo = ?, estoqueAtual = ?, valor = ?, desconto = ?, valorTotal = ? where codigo = ?";
+                 
         try{
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
             pst.setString(1, produto.getNome());
@@ -103,6 +103,8 @@ public class RepositorioProduto implements iRepositorioProduto {
             pst.setFloat(7, produto.getValor());
             pst.setFloat(8, produto.getDesconto());
             pst.setFloat(9, produto.getValorTotal());
+            pst.setInt(10, produto.getCodigo());
+            
             if (pst.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Produto Alterado com êxito");
                 return true;
@@ -125,5 +127,31 @@ public class RepositorioProduto implements iRepositorioProduto {
             editarProduto(produto);
         }
         return false;
+    }
+    
+    public Produto localizarProduto(Integer codigo){
+        String sql="select * from produto where codigo = ? ";
+        Produto obj = new Produto();
+        try{
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            pst.setInt(1, codigo);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                obj.setCodigo(rs.getInt("codigo"));
+                obj.setNome(rs.getString("nome"));
+                obj.setMarca(rs.getString("marca"));
+                obj.setCategoria(rs.getString("categoria"));
+                obj.setQuantidade(rs.getInt("quantidade"));
+                obj.setEstoqueMinimo(rs.getInt("estoqueMinimo"));
+                obj.setEstoqueAtual(rs.getInt("estoqueAtual"));
+                obj.setValor(rs.getFloat("valor"));
+                obj.setDesconto(rs.getFloat("desconto"));
+                obj.setValorTotal(rs.getFloat("valorTotal"));
+                return obj;
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de pesquisa" + ex.getMessage());            
+        }
+        return null;
     }
 }

@@ -6,7 +6,6 @@
 package negocio.regras;
 
 import negocio.Produto;
-import negocio.excecoes.CadastroProdutoException;
 
 /**
  *
@@ -20,7 +19,7 @@ public class RegraCadastroProduto {
 
     public void calculaValorTotal(Produto produto) {
         if (!(produto.getDesconto() == 0)) {
-            produto.setValorTotal(produto.getValor() - (produto.getDesconto() * produto.getValor()));//Calulo de desconto
+            produto.setValorTotal(produto.getValor() - ((produto.getDesconto()/100) * produto.getValor()));//Calulo de desconto
         }else{
             produto.setValorTotal(produto.getValor());//caso o desconto seja zero, considerar o valor base
         }

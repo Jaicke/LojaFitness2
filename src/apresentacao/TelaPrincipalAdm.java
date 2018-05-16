@@ -19,6 +19,7 @@ import negocio.regras.RegraCadastroProduto;
 public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     RepositorioProduto produto = new RepositorioProduto();
+    Produto obj = new Produto();
 
     public void atualizaTabela() {
         listaObjetos.clear();
@@ -152,6 +153,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         abaListagemProduto = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
+        txtPesquisaProduto = new javax.swing.JTextField();
+        btnPesquisarProduto = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         abaCadastrarProduto = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -664,15 +668,34 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(tblProdutos);
 
+        btnPesquisarProduto.setText("Ok");
+
+        jLabel4.setText("Nome");
+
         javax.swing.GroupLayout abaListagemProdutoLayout = new javax.swing.GroupLayout(abaListagemProduto);
         abaListagemProduto.setLayout(abaListagemProdutoLayout);
         abaListagemProdutoLayout.setHorizontalGroup(
             abaListagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addGroup(abaListagemProdutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPesquisarProduto)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaListagemProdutoLayout.setVerticalGroup(
             abaListagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaListagemProdutoLayout.createSequentialGroup()
+                .addGap(0, 5, Short.MAX_VALUE)
+                .addGroup(abaListagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarProduto)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         abasProduto.addTab("Listagem", abaListagemProduto);
@@ -1043,6 +1066,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private void btnEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdutoActionPerformed
         trataEdicao(true);
         txtNome.requestFocus();
+        
     }//GEN-LAST:event_btnEditarProdutoActionPerformed
 
     private void btnCancelarCadastroProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadastroProdActionPerformed
@@ -1137,6 +1161,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarProduto;
     private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnExcluirProduto;
+    private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JButton btnSalvarCliente;
     private javax.swing.JButton btnSalvarProduto;
     private javax.swing.JComboBox<String> cbxCategoria;
@@ -1172,6 +1197,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -1223,6 +1249,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome2;
     private javax.swing.JTextField txtNome3;
     private javax.swing.JTextField txtNomeRepresentante;
+    private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtRua;
