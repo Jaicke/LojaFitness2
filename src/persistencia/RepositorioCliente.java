@@ -36,7 +36,7 @@ public class RepositorioCliente implements iRepositorioCliente {
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUf(rs.getString("uf"));
                 obj.setCep(rs.getString("cep"));
-                obj.setCelular(rs.getString("celular"));
+                obj.SetCelular(rs.getString("celular"));
                 obj.setDataNascimento(rs.getString("dataNascimento"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setRg(rs.getString("rg"));

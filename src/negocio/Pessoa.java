@@ -79,9 +79,11 @@ public abstract class Pessoa {
     public String getCelular() {
         return celular;
     }
-
-    public void setCelular(String celular) {
+    
+    public void SetCelular(String celular){
         this.celular = celular;
     }
+
+    
 
 }

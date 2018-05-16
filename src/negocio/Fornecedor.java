@@ -1,10 +1,10 @@
-package negocio;
+ package negocio;
 
 
 public class Fornecedor extends Pessoa {
     private String cnpj;
-    private String nomeRepresentante;
-    private String celularRepresentante;
+    private String nomeEmpresa;
+    private String telefoneEmpresa;
 
     public String getCnpj() {
         return cnpj;
@@ -14,20 +14,20 @@ public class Fornecedor extends Pessoa {
         this.cnpj = cnpj;
     }
 
-    public String getNomeRepresentante() {
-        return nomeRepresentante;
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
     }
 
-    public void setNomeRepresentante(String nomeRepresentante) {
-        this.nomeRepresentante = nomeRepresentante;
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
     }
 
-    public String getCelularRepresentante() {
-        return celularRepresentante;
+    public String getTelefoneEmpresa() {
+        return telefoneEmpresa;
     }
 
-    public void setCelularRepresentante(String celularRepresentante) {
-        this.celularRepresentante = celularRepresentante;
+    public void setTelefoneEmpresa(String telefoneEmpresa) {
+        this.telefoneEmpresa = telefoneEmpresa;
     }
     
     

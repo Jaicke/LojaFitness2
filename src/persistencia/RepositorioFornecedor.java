@@ -5,32 +5,141 @@
  */
 package persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import negocio.Fornecedor;
+import negocio.iRepositorioFornecedor;
 
 
 /**
  *
  * @author EDVALDO
  */
-public class RepositorioFornecedor {
-    
-     /*public List<Fornecedor> getList(){
-        return Dados.listaFornecedor;
-        
-    }
-    
-    public boolean salvar(Fornecedor obj){
-        if(obj.getId()== null){
-            int codigo = Dados.listaFornecedor.size() + 1;
-            obj.setId(codigo);
-            Dados.listaFornecedor.add(obj);
+public class RepositorioFornecedor implements iRepositorioFornecedor{
+
+    @Override
+    public List<Fornecedor> getLista() throws SQLException {
+        String sql = "select * from fornecedor";
+        List<Fornecedor> lista = new ArrayList<>();
+        try {
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Fornecedor obj = new Fornecedor();
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRua(rs.getString("rua"));
+                obj.setComplemento(rs.getString("completo"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("uf"));
+                obj.setCep(rs.getString("cep"));
+                obj.SetCelular(rs.getString("celular"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setNomeEmpresa(rs.getString("nomeEmpresa"));
+                obj.setTelefoneEmpresa(rs.getString("telefoneEmpresa"));
+                lista.add(obj);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + ex.getMessage());
         }
-        return true;
+        return lista;
+    }
+
+    @Override
+    public boolean cadastrarFornecedor(Fornecedor fornecedor) throws SQLException {
+        String sql = "insert into fornecedor(nome, rua, completo, bairro, cidade, uf, cep, celular, cnpj, nomeEmpresa, telefoneEmpresa)"
+                + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            
+            pst.setString(1, fornecedor.getNome());
+            pst.setString(2, fornecedor.getRua());
+            pst.setString(3, fornecedor.getComplemento());
+            pst.setString(4, fornecedor.getBairro());
+            pst.setString(5, fornecedor.getCidade());
+            pst.setString(6, fornecedor.getUf());
+            pst.setString(7, fornecedor.getCep());
+            pst.setString(8, fornecedor.getCelular());
+            pst.setString(9, fornecedor.getCnpj());
+            pst.setString(10, fornecedor.getNomeEmpresa());
+            pst.setString(11, fornecedor.getTelefoneEmpresa());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Fornecedor Cadastrado com êxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Fornecedor não Cadastrado, tente novamente");
+                return false;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removerFornecedor(Fornecedor fornecedor) throws SQLException {
+        String sql = "delete from fornecedor where id = ?";
+        try{
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            pst.setInt(1, fornecedor.getId());
+            if(pst.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Fornecedor deletado com êxito");
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Fornecedor não deletado");
+                return false;
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean editarFornecedor(Fornecedor fornecedor) throws SQLException {
+        String sql = "update produto set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, cnpj = ?, nomeEmpresa = ?, telefoneEmpresa = ? where id = ?";
+                 
+        try{
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            pst.setString(1, fornecedor.getNome());
+            pst.setString(2, fornecedor.getRua());
+            pst.setString(3, fornecedor.getComplemento());
+            pst.setString(4, fornecedor.getBairro());
+            pst.setString(5, fornecedor.getCidade());
+            pst.setString(6, fornecedor.getUf());
+            pst.setString(7, fornecedor.getCep());
+            pst.setString(8, fornecedor.getCelular());
+            pst.setString(9, fornecedor.getCnpj());
+            pst.setString(10, fornecedor.getNomeEmpresa());
+            pst.setString(11, fornecedor.getTelefoneEmpresa());
+            
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Fornecedor Alterado com êxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Fornecedor não Alterado, tente novamente");
+                return false;
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean salvarFornecedor(Fornecedor fornecedor) throws SQLException {
+        if (fornecedor.getId() == null) {
+            cadastrarFornecedor(fornecedor);
+        } else {
+            editarFornecedor(fornecedor);
+        }
+        return false;
     }
     
-    public boolean remover(Fornecedor obj){
-        Dados.listaFornecedor.remove(obj);
-        return true;
-    }*/
+    
 }
