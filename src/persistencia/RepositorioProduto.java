@@ -9,12 +9,11 @@ import javax.swing.JOptionPane;
 import negocio.Produto;
 import negocio.iRepositorioProduto;
 
-
 public class RepositorioProduto implements iRepositorioProduto {
 
     @Override
-    public List<Produto> getLista()  {
-       String sql = "select * from produto";
+    public List<Produto> getLista() {
+        String sql = "select * from produto";
         List<Produto> lista = new ArrayList<>();
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -41,28 +40,89 @@ public class RepositorioProduto implements iRepositorioProduto {
 
     @Override
     public boolean cadastrarProduto(Produto produto) throws SQLException {
-        return false;
+        String sql = "insert into produto(nome, marca,categoria,quantidade,estoqueMinimo,estoqueAtual,valor,desconto,valorTotal)"
+                + "values(?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            
+            pst.setString(1, produto.getNome());
+            pst.setString(2, produto.getMarca());
+            pst.setString(3, produto.getCategoria());
+            pst.setInt(4, produto.getQuantidade());
+            pst.setInt(5, produto.getEstoqueMinimo());
+            pst.setInt(6, produto.getEstoqueAtual());
+            pst.setFloat(7, produto.getValor());
+            pst.setFloat(8, produto.getDesconto());
+            pst.setFloat(9, produto.getValorTotal());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Produto Cadastrado com êxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não Cadastrado, tente novamente");
+                return false;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+
     }
 
     @Override
     public boolean removerProduto(Produto produto) throws SQLException {
-        return false;
+        String sql = "delete from produto where codigo = ?";
+        try{
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            pst.setInt(1, produto.getCodigo());
+            if(pst.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Produto deletado com êxito");
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Produto não deletado");
+                return false;
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+        
     }
 
     @Override
-    public boolean atualizarProduto(Produto produto) throws SQLException {
-     
-       return false; 
+    public boolean editarProduto(Produto produto) throws SQLException {
+        String sql = "update produto set nome = ?, marca = ?, categoria = ?, quantidade = ?"
+                + "estoqueAtual = ?, estoqueMinimo = ?, valor = ?, desconto = ?, valorTotal - ? ";
+        try{
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+            pst.setString(1, produto.getNome());
+            pst.setString(2, produto.getMarca());
+            pst.setString(3, produto.getCategoria());
+            pst.setInt(4, produto.getQuantidade());
+            pst.setInt(5, produto.getEstoqueMinimo());
+            pst.setInt(6, produto.getEstoqueAtual());
+            pst.setFloat(7, produto.getValor());
+            pst.setFloat(8, produto.getDesconto());
+            pst.setFloat(9, produto.getValorTotal());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Produto Alterado com êxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não Alterado, tente novamente");
+                return false;
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de SQL:" + ex.getMessage());
+            return false;
+        }
+        
     }
-
-
 
     @Override
     public boolean salvarProduto(Produto produto) throws SQLException {
-        if(produto.getCodigo() == null){
+        if (produto.getCodigo() == null) {
             cadastrarProduto(produto);
-        }else{
-            atualizarProduto(produto);
+        } else {
+            editarProduto(produto);
         }
         return false;
     }

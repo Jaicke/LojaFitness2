@@ -15,7 +15,7 @@ import negocio.Fornecedor;
  */
 public class RepositorioFornecedor {
     
-     public List<Fornecedor> getList(){
+     /*public List<Fornecedor> getList(){
         return Dados.listaFornecedor;
         
     }
@@ -32,5 +32,5 @@ public class RepositorioFornecedor {
     public boolean remover(Fornecedor obj){
         Dados.listaFornecedor.remove(obj);
         return true;
-    }
+    }*/
 }

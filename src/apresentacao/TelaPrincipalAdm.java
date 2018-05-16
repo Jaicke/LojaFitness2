@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.regras.RegraCadastroProduto;
 
@@ -22,7 +20,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     RepositorioProduto produto = new RepositorioProduto();
 
-    public void atualizaTabela(){
+    public void atualizaTabela() {
         listaObjetos.clear();
         listaObjetos.addAll(produto.getLista());
         int linha = listaObjetos.size() - 1;
@@ -35,10 +33,10 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     private void trataEdicao(boolean editando) {
         btnCancelarCadastroProd.setEnabled(editando);
-        btnSalvarProduto.setEnabled(editando);        
+        btnSalvarProduto.setEnabled(editando);
         btnEditarProduto.setEnabled(!editando);
         btnExcluirProduto.setEnabled(!editando);
-        btnAddProduto.setEnabled(!editando);        
+        btnAddProduto.setEnabled(!editando);
         cbxMarca.setEnabled(editando);
         cbxCategoria.setEnabled(editando);
         tblProdutos.setEnabled(!editando);
@@ -50,8 +48,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtQuantidade.setEditable(editando);
 
     }
-
-    
 
     /**
      * Creates new form TelaAdm
@@ -699,7 +695,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", " " }));
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Suplemento", " " }));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.categoria}"), cbxCategoria, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
@@ -725,17 +721,20 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Valor");
+        jLabel1.setText("Valor R$");
 
-        jLabel2.setText("Desconto");
+        jLabel2.setText("Desconto (%)");
 
-        jLabel11.setText("Valor Total");
+        jLabel11.setText("Valor Total R$");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.valor}"), txtValor, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.desconto}"), txtDesconto, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        txtTotal.setEditable(false);
+        txtTotal.setEnabled(false);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.valorTotal}"), txtTotal, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -993,19 +992,20 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnItemProdutoActionPerformed
 
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
-            RegraCadastroProduto regra = new RegraCadastroProduto();
-            int linhaSelecionada = tblProdutos.getSelectedRow();
-            Produto obj = listaObjetos.get(linhaSelecionada);
-            regra.somaEstoque(obj);
+        RegraCadastroProduto regra = new RegraCadastroProduto();
+        int linhaSelecionada = tblProdutos.getSelectedRow();
+        Produto obj = listaObjetos.get(linhaSelecionada);
+        regra.calculaValorTotal(obj);
+        regra.somaEstoque(obj);
         try {
             produto.salvarProduto(obj);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro");
+            JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
-            trataEdicao(false);
-            atualizaTabela();
-            
-        
+        trataEdicao(false);
+        atualizaTabela();
+
+
     }//GEN-LAST:event_btnSalvarProdutoActionPerformed
 
     private void cbxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMarcaActionPerformed
@@ -1029,7 +1029,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Sim", "Não"}, "Sim");
         if (opcao == 0) {
-            int linhaSelecionada = tblProdutos.getSelectedRow();            
+            int linhaSelecionada = tblProdutos.getSelectedRow();
             Produto obj = listaObjetos.get(linhaSelecionada);
             try {
                 produto.removerProduto(obj);

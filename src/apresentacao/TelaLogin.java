@@ -5,7 +5,6 @@
  */
 package apresentacao;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -103,16 +102,17 @@ public class TelaLogin extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         RegraLogin regra = new RegraLogin();
-        Login login = new Login();
+        Login login = new Login();        
         login.setUsuario(txtUsuario.getText());
         login.setSenha(txtSenha.getText());
 
         if (cbxTipo.getSelectedItem().toString().equals("Administrador")) {
             try {
-                regra.efetuarLogin(login);
+                login.setAdm(true);//setando pra regra que é login de adm
+                regra.efetuarLogin(login);                
                 dispose();
                 TelaPrincipalAdm tela = new TelaPrincipalAdm();
-                tela.setVisible(true);
+                tela.setVisible(true);                
             } catch (LoginException e) {
                 JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválido ");
                 txtUsuario.setBorder(new LineBorder(Color.red));
@@ -122,6 +122,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         } else if (cbxTipo.getSelectedItem().toString().equals("Cliente")) {
             try{
+                login.setAdm(false);
                 regra.efetuarLogin(login);
                 dispose();
                 new TelaPrincipalCliente().setVisible(true);

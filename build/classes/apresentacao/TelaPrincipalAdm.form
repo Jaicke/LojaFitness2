@@ -1325,10 +1325,11 @@
                     <Component class="javax.swing.JComboBox" name="cbxCategoria">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="3">
+                          <StringArray count="4">
                             <StringItem index="0" value="Feminino"/>
                             <StringItem index="1" value="Masculino"/>
-                            <StringItem index="2" value=" "/>
+                            <StringItem index="2" value="Suplemento"/>
+                            <StringItem index="3" value=" "/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1385,17 +1386,17 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Valor"/>
+                        <Property name="text" type="java.lang.String" value="Valor R$"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Desconto"/>
+                        <Property name="text" type="java.lang.String" value="Desconto (%)"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel11">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Valor Total"/>
+                        <Property name="text" type="java.lang.String" value="Valor Total R$"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtValor">
@@ -1413,6 +1414,10 @@
                       </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtTotal">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
                       <BindingProperties>
                         <BindingProperty name="text" source="tblProdutos" sourcePath="${selectedElement.valorTotal}" target="txtTotal" targetPath="text" updateStrategy="0" immediately="false">
                           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>

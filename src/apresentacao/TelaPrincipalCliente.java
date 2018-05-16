@@ -67,13 +67,10 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Título 1", "Título 2", "Título 3"
             }
         ));
         jScrollPane1.setViewportView(tblProdutos);
@@ -175,18 +172,18 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOk))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(comprarLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(21, 21, 21)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFinalizar))
                     .addGroup(comprarLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(38, 38, 38)
                         .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -206,7 +203,7 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                         .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(comprar);
