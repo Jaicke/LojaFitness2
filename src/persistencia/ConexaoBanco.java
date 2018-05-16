@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class ConexaoBanco {
 
-    private static final String banco = "jdbc:mysql://localhost:3306/masterbanco";
+    private static final String banco = "jdbc:mysql://localhost:3306/scriptobviamente";
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String usuario = "root";
     private static final String senha = "";

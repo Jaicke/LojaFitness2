@@ -10,7 +10,9 @@ import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import negocio.Cliente;
 import negocio.regras.RegraCadastroProduto;
+import persistencia.RepositorioCliente;
 
 /**
  *
@@ -19,12 +21,13 @@ import negocio.regras.RegraCadastroProduto;
 public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     RepositorioProduto produto = new RepositorioProduto();
+    RepositorioCliente cliente = new RepositorioCliente();
     Produto obj = new Produto();
 
     public void atualizaTabela() {
-        listaObjetos.clear();
-        listaObjetos.addAll(produto.getLista());
-        int linha = listaObjetos.size() - 1;
+        listaProduto.clear();
+        listaProduto.addAll(produto.getLista());
+        int linha = listaProduto.size() - 1;
         if (linha >= 0) {
             tblProdutos.setRowSelectionInterval(linha, linha);
             tblProdutos.scrollRectToVisible(
@@ -33,6 +36,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }
 
     private void trataEdicao(boolean editando) {
+        //trata edição produto 
         btnCancelarCadastroProd.setEnabled(editando);
         btnSalvarProduto.setEnabled(editando);
         btnEditarProduto.setEnabled(!editando);
@@ -47,6 +51,24 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtTotal.setEditable(editando);
         txtValor.setEditable(editando);
         txtQuantidade.setEditable(editando);
+        
+        //trata ediçao cliente
+        btnCancelarCliente.setEnabled(editando);
+        btnSalvarCliente.setEnabled(editando);
+        btnEditarCliente.setEnabled(!editando);
+        btnExcluirCliente.setEnabled(!editando);
+        btnAddCliente.setEnabled(!editando);
+        txtNomeCliente.setEditable(editando);
+        txtNascimentoCliente.setEditable(editando);
+        txtBairroCliente.setEditable(editando);
+        txtRuaCliente.setEditable(editando);
+        txtComplementoCliente.setEditable(editando);
+        txtCidadeCliente.setEditable(editando);
+        txtCpf.setEditable(editando);
+        txtRg.setEditable(editando);
+        txtCepCliente.setEditable(editando);
+        txtCelularCliente.setEditable(editando);
+        
 
     }
 
@@ -69,7 +91,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        listaObjetos = listaObjetos = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Produto>())
+        listaProduto = listaProduto = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Produto>())
+        ;
+        listaCliente = listaCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Cliente>())
         ;
         addCliente = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
@@ -85,33 +109,33 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         btnExcluirCliente = new javax.swing.JButton();
         btnEditarCliente = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        txtCep1 = new javax.swing.JTextField();
+        txtCepCliente = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        txtCpf1 = new javax.swing.JTextField();
-        txtNome2 = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
+        txtNomeCliente = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtEndereco1 = new javax.swing.JTextField();
-        txtCidade1 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
+        txtRuaCliente = new javax.swing.JTextField();
+        txtCidadeCliente = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxUfCliente = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtBairro1 = new javax.swing.JTextField();
-        txtNascimento1 = new javax.swing.JTextField();
+        txtBairroCliente = new javax.swing.JTextField();
+        txtNascimentoCliente = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        txtFone1 = new javax.swing.JTextField();
-        txtCelular1 = new javax.swing.JTextField();
-        txtComplemento1 = new javax.swing.JTextField();
+        txtCelularCliente = new javax.swing.JTextField();
+        txtComplementoCliente = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
         jLabel35 = new javax.swing.JLabel();
+        txtEmailCliente = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         addFornecedor = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         abasFornecedor = new javax.swing.JTabbedPane();
@@ -200,17 +224,48 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         addCliente.setVisible(false);
         addCliente.getContentPane().setLayout(new javax.swing.OverlayLayout(addCliente.getContentPane()));
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaCliente, tblCliente);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rua}"));
+        columnBinding.setColumnName("Rua");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${complemento}"));
+        columnBinding.setColumnName("Complemento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bairro}"));
+        columnBinding.setColumnName("Bairro");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cidade}"));
+        columnBinding.setColumnName("Cidade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${uf}"));
+        columnBinding.setColumnName("Uf");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cep}"));
+        columnBinding.setColumnName("Cep");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${celular}"));
+        columnBinding.setColumnName("Celular");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataNascimento}"));
+        columnBinding.setColumnName("Data Nascimento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
+        columnBinding.setColumnName("Cpf");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rg}"));
+        columnBinding.setColumnName("Rg");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${email}"));
+        columnBinding.setColumnName("Email");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane3.setViewportView(tblCliente);
 
         javax.swing.GroupLayout abaListagemClienteLayout = new javax.swing.GroupLayout(abaListagemCliente);
@@ -232,35 +287,73 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         acoesCliente.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAddCliente.setText("Adicionar");
+        btnAddCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddClienteActionPerformed(evt);
+            }
+        });
         acoesCliente.add(btnAddCliente);
 
         btnSalvarCliente.setText("Salvar");
+        btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarClienteActionPerformed(evt);
+            }
+        });
         acoesCliente.add(btnSalvarCliente);
 
         btnCancelarCliente.setText("Cancelar");
+        btnCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarClienteActionPerformed(evt);
+            }
+        });
         acoesCliente.add(btnCancelarCliente);
 
         btnExcluirCliente.setText("Excluir");
+        btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirClienteActionPerformed(evt);
+            }
+        });
         acoesCliente.add(btnExcluirCliente);
 
         btnEditarCliente.setText("Editar");
+        btnEditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarClienteActionPerformed(evt);
+            }
+        });
         acoesCliente.add(btnEditarCliente);
 
         jLabel23.setText("Complemento");
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cep}"), txtCepCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel24.setText("Bairro");
 
-        txtCpf1.addActionListener(new java.awt.event.ActionListener() {
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cpf}"), txtCpf, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpf1ActionPerformed(evt);
+                txtCpfActionPerformed(evt);
             }
         });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNomeCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         jLabel25.setText("Número de Celular");
 
         jLabel3.setText("Rua");
 
-        jLabel26.setText("Número de Telefone");
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rua}"), txtRuaCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cidade}"), txtCidadeCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         jLabel27.setText("UF");
 
@@ -268,7 +361,10 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         jLabel29.setText("RG");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbxUfCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.uf}"), cbxUfCliente, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
         jLabel30.setText("CEP");
 
@@ -276,11 +372,31 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         jLabel32.setText("Cidade");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bairro}"), txtBairroCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), txtNascimentoCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel33.setText("Data de Nascimento");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.celular}"), txtCelularCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.complemento}"), txtComplementoCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         jLabel34.setText("CPF");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rg}"), txtRg, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel35.setText("Usuário");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), txtEmailCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel14.setText("Email");
 
         javax.swing.GroupLayout abaCadastroClienteLayout = new javax.swing.GroupLayout(abaCadastroCliente);
         abaCadastroCliente.setLayout(abaCadastroClienteLayout);
@@ -295,13 +411,13 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         .addGap(115, 115, 115)
                         .addComponent(jLabel33))
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(txtNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
                         .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel34)
-                            .addComponent(txtCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(70, 70, 70)
                         .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
@@ -311,9 +427,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         .addGap(171, 171, 171)
                         .addComponent(jLabel23))
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(txtEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(txtComplemento1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtComplementoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addGap(82, 82, 82)
@@ -322,30 +438,26 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         .addComponent(jLabel27)
                         .addGap(57, 57, 57)
                         .addComponent(jLabel30))
+                    .addComponent(jLabel25)
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(txtBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtCep1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel25))
-                    .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(txtFone1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel28))
-                    .addGroup(abaCadastroClienteLayout.createSequentialGroup()
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel35)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel28)))
+                    .addGroup(abaCadastroClienteLayout.createSequentialGroup()
+                        .addComponent(txtBairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(cbxUfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtCepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14)
+                    .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCadastroClienteLayout.setVerticalGroup(
@@ -358,8 +470,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(jLabel33))
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,7 +479,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addGroup(abaCadastroClienteLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(40, 40, 40)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,8 +487,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(jLabel23))
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtComplemento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRuaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComplementoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
@@ -385,27 +497,27 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(jLabel30))
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCep1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel25))
-                .addGap(6, 6, 6)
-                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel28))
-                .addGap(6, 6, 6)
-                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxUfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 76, Short.MAX_VALUE))
+                .addGap(0, 42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", abaCadastroCliente);
@@ -627,8 +739,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         tblProdutos.getTableHeader().setReorderingAllowed(false);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaObjetos, tblProdutos);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigo}"));
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaProduto, tblProdutos);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigo}"));
         columnBinding.setColumnName("Codigo");
         columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
@@ -712,7 +824,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         txtCodigo.setEditable(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codigo}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codigo}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -1017,7 +1129,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
         RegraCadastroProduto regra = new RegraCadastroProduto();
         int linhaSelecionada = tblProdutos.getSelectedRow();
-        Produto obj = listaObjetos.get(linhaSelecionada);
+        Produto obj = listaProduto.get(linhaSelecionada);
         regra.calculaValorTotal(obj);
         regra.somaEstoque(obj);
         try {
@@ -1036,8 +1148,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxMarcaActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
-        listaObjetos.add((Produto) new Produto());
-        int linha = listaObjetos.size() - 1;
+        listaProduto.add((Produto) new Produto());
+        int linha = listaProduto.size() - 1;
         tblProdutos.setRowSelectionInterval(linha, linha);
         trataEdicao(true);
         txtNome.requestFocus();
@@ -1053,7 +1165,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         new String[]{"Sim", "Não"}, "Sim");
         if (opcao == 0) {
             int linhaSelecionada = tblProdutos.getSelectedRow();
-            Produto obj = listaObjetos.get(linhaSelecionada);
+            Produto obj = listaProduto.get(linhaSelecionada);
             try {
                 produto.removerProduto(obj);
             } catch (SQLException ex) {
@@ -1065,6 +1177,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     private void btnEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdutoActionPerformed
         trataEdicao(true);
+        txtQuantidade.setText("0");
         txtNome.requestFocus();
         
     }//GEN-LAST:event_btnEditarProdutoActionPerformed
@@ -1078,9 +1191,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
-    private void txtCpf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpf1ActionPerformed
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCpf1ActionPerformed
+    }//GEN-LAST:event_txtCpfActionPerformed
 
     private void txtCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjActionPerformed
         // TODO add your handling code here:
@@ -1091,6 +1204,55 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         TelaLogin tela = new TelaLogin(this, true);
         tela.setVisible(true);
     }//GEN-LAST:event_mnItemSairMouseClicked
+
+    private void btnAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClienteActionPerformed
+        listaCliente.add((Cliente) new Cliente());
+        int linha = listaCliente.size() - 1;
+        tblCliente.setRowSelectionInterval(linha, linha);  
+        trataEdicao(true);
+        txtNomeCliente.requestFocus();
+    }//GEN-LAST:event_btnAddClienteActionPerformed
+
+    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
+        int linhaSelecionada = tblCliente.getSelectedRow();
+        Cliente obj = listaCliente.get(linhaSelecionada);        
+        try {
+            cliente.salvarCliente(obj);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
+        }    
+        trataEdicao(true);
+        atualizaTabela();
+    }//GEN-LAST:event_btnSalvarClienteActionPerformed
+
+    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
+        int opcao
+                = JOptionPane.showOptionDialog(null,
+                        "Confirma a exclusão?",
+                        "Pergunta",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        new String[]{"Sim", "Não"}, "Sim");
+        if (opcao == 0) {
+            int linhaSelecionada = tblCliente.getSelectedRow();
+            Cliente obj = listaCliente.get(linhaSelecionada);
+            try {
+                cliente.removerCliente(obj);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro");
+            }
+            atualizaTabela();
+        }
+    }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
+    private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
+        trataEdicao(true);
+        txtNomeCliente.requestFocus();
+    }//GEN-LAST:event_btnEditarClienteActionPerformed
+
+    private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
+        trataEdicao(false);
+    }//GEN-LAST:event_btnCancelarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1166,23 +1328,23 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvarProduto;
     private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxMarca;
+    private javax.swing.JComboBox<String> cbxUfCliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1217,7 +1379,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private java.util.List<Produto> listaObjetos;
+    private java.util.List<Cliente> listaCliente;
+    private java.util.List<Produto> listaProduto;
     private javax.swing.JMenuItem mnItemCliente;
     private javax.swing.JMenuItem mnItemFornecedor;
     private javax.swing.JMenuItem mnItemProduto;
@@ -1225,34 +1388,34 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnItemSobre;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblProdutos;
-    private javax.swing.JTextField txtBairro1;
     private javax.swing.JTextField txtBairro2;
-    private javax.swing.JTextField txtCelular1;
+    private javax.swing.JTextField txtBairroCliente;
+    private javax.swing.JTextField txtCelularCliente;
     private javax.swing.JTextField txtCelularRepresentante;
-    private javax.swing.JTextField txtCep1;
     private javax.swing.JTextField txtCep2;
-    private javax.swing.JTextField txtCidade1;
+    private javax.swing.JTextField txtCepCliente;
     private javax.swing.JTextField txtCidade2;
+    private javax.swing.JTextField txtCidadeCliente;
     private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtComplemento1;
     private javax.swing.JTextField txtComplemento2;
-    private javax.swing.JTextField txtCpf1;
+    private javax.swing.JTextField txtComplementoCliente;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDesconto;
-    private javax.swing.JTextField txtEndereco1;
+    private javax.swing.JTextField txtEmailCliente;
     private javax.swing.JTextField txtEstoqueAtual;
     private javax.swing.JTextField txtEstoqueMin;
-    private javax.swing.JTextField txtFone1;
     private javax.swing.JTextField txtFone2;
-    private javax.swing.JTextField txtNascimento1;
+    private javax.swing.JTextField txtNascimentoCliente;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNome2;
     private javax.swing.JTextField txtNome3;
+    private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtNomeRepresentante;
     private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtRua;
+    private javax.swing.JTextField txtRuaCliente;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtUsuario;
