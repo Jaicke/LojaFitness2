@@ -31,17 +31,17 @@ public class RepositorioFornecedor implements iRepositorioFornecedor{
             while (rs.next()) {
                 Fornecedor obj = new Fornecedor();
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
+                obj.setNome(rs.getString("nome_representante"));
                 obj.setRua(rs.getString("rua"));
-                obj.setComplemento(rs.getString("completo"));
+                obj.setComplemento(rs.getString("complemento"));
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUf(rs.getString("uf"));
                 obj.setCep(rs.getString("cep"));
-                obj.SetCelular(rs.getString("celular"));
+                obj.SetCelular(rs.getString("celular_representante"));
                 obj.setCnpj(rs.getString("cnpj"));
-                obj.setNomeEmpresa(rs.getString("nomeEmpresa"));
-                obj.setTelefoneEmpresa(rs.getString("telefoneEmpresa"));
+                obj.setNomeEmpresa(rs.getString("nome_empresa"));
+                obj.setTelefoneEmpresa(rs.getString("telefone_empresa"));
                 lista.add(obj);
             }
         } catch (SQLException ex) {
@@ -52,7 +52,7 @@ public class RepositorioFornecedor implements iRepositorioFornecedor{
 
     @Override
     public boolean cadastrarFornecedor(Fornecedor fornecedor) throws SQLException {
-        String sql = "insert into fornecedor(nome, rua, completo, bairro, cidade, uf, cep, celular, cnpj, nomeEmpresa, telefoneEmpresa)"
+        String sql = "insert into fornecedor(nome_representante, rua, complemento, bairro, cidade, uf, cep, celular_representante, cnpj, nome_empresa, telefone_empresa)"
                 + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -102,7 +102,7 @@ public class RepositorioFornecedor implements iRepositorioFornecedor{
 
     @Override
     public boolean editarFornecedor(Fornecedor fornecedor) throws SQLException {
-        String sql = "update produto set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, cnpj = ?, nomeEmpresa = ?, telefoneEmpresa = ? where id = ?";
+        String sql = "update produto set nome_representante = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular_representante = ?, cnpj = ?, nome_empresa = ?, telefone_empresa = ? where id = ?";
                  
         try{
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);

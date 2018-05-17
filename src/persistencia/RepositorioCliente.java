@@ -28,7 +28,8 @@ public class RepositorioCliente implements iRepositorioCliente {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Cliente obj = new Cliente();
+                Cliente obj = new Cliente(); 
+                obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRua(rs.getString("rua"));
                 obj.setComplemento(rs.getString("complemento"));
@@ -37,7 +38,7 @@ public class RepositorioCliente implements iRepositorioCliente {
                 obj.setUf(rs.getString("uf"));
                 obj.setCep(rs.getString("cep"));
                 obj.SetCelular(rs.getString("celular"));
-                obj.setDataNascimento(rs.getString("dataNascimento"));
+                obj.setDataNascimento(rs.getString("data_nascimento"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setRg(rs.getString("rg"));
                 obj.setEmail(rs.getString("email"));
@@ -51,7 +52,7 @@ public class RepositorioCliente implements iRepositorioCliente {
 
     @Override
     public boolean cadastrarCliente(Cliente cliente) throws SQLException {
-        String sql = "insert into cliente(nome, rua, complemento, bairro, cidade, uf, cep, celular, dataNascimento, cpf, rg, email)"
+        String sql = "insert into cliente(nome, rua, complemento, bairro, cidade, uf, cep, celular, data_nascimento, cpf, rg, email)"
                 + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -84,7 +85,7 @@ public class RepositorioCliente implements iRepositorioCliente {
 
     @Override
     public boolean removerCliente(Cliente cliente) throws SQLException {
-        String sql = "delete from produto where codigo = ?";
+        String sql = "delete from cliente where id = ?";
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
             pst.setInt(1, cliente.getId());
@@ -103,7 +104,7 @@ public class RepositorioCliente implements iRepositorioCliente {
 
     @Override
     public boolean editarCliente(Cliente cliente) throws SQLException {
-        String sql = "update cliente set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, dataNascimento = ?, cpf = ?, rg = ?, email = ? where id = ?";
+        String sql = "update cliente set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, data_nascimento = ?, cpf = ?, rg = ?, email = ? where id = ?";
 
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);

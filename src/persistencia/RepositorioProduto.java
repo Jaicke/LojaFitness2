@@ -29,7 +29,7 @@ public class RepositorioProduto implements iRepositorioProduto {
                 obj.setEstoqueAtual(rs.getInt("estoqueAtual"));
                 obj.setValor(rs.getFloat("valor"));
                 obj.setDesconto(rs.getFloat("desconto"));
-                obj.setValorTotal(rs.getFloat("valorTotal"));
+                obj.setValorTotal(rs.getFloat("total"));
                 lista.add(obj);
             }
         } catch (SQLException e) {
@@ -40,7 +40,7 @@ public class RepositorioProduto implements iRepositorioProduto {
 
     @Override
     public boolean cadastrarProduto(Produto produto) throws SQLException {
-        String sql = "insert into produto(nome, marca,categoria,quantidade,estoqueMinimo,estoqueAtual,valor,desconto,valorTotal)"
+        String sql = "insert into produto(nome, marca,categoria,quantidade,estoqueMinimo,estoqueAtual,valor,desconto,total)"
                 + "values(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -90,7 +90,7 @@ public class RepositorioProduto implements iRepositorioProduto {
 
     @Override
     public boolean editarProduto(Produto produto) throws SQLException {
-        String sql = "update produto set nome = ?, marca = ?, categoria = ?, quantidade = ?, estoqueMinimo = ?, estoqueAtual = ?, valor = ?, desconto = ?, valorTotal = ? where codigo = ?";
+        String sql = "update produto set nome = ?, marca = ?, categoria = ?, quantidade = ?, estoqueMinimo = ?, estoqueAtual = ?, valor = ?, desconto = ?, total = ? where codigo = ?";
                  
         try{
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -146,7 +146,7 @@ public class RepositorioProduto implements iRepositorioProduto {
                 obj.setEstoqueAtual(rs.getInt("estoqueAtual"));
                 obj.setValor(rs.getFloat("valor"));
                 obj.setDesconto(rs.getFloat("desconto"));
-                obj.setValorTotal(rs.getFloat("valorTotal"));
+                obj.setValorTotal(rs.getFloat("total"));
                 return obj;
             }
         }catch(SQLException ex){
