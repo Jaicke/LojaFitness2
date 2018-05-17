@@ -4,14 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Compra.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/persistencia/RepositorioCliente.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/persistencia/RepositorioProduto.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/iRepositorioProduto.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Fornecedor.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/TelaPrincipalAdm.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/persistencia/RepositorioFornecedor.java</file>
+            <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Pessoa.java</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/apresentacao/sqlmaster.sql</file>
             <file>file:/C:/Users/lukas/Documents/NetBeansProjects/LojaFitness2/src/negocio/Produto.java</file>
-            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/regras/RegraLogin.java</file>
-            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/persistencia/RepositorioCliente.java</file>
-            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/iRepositorioCliente.java</file>
         </group>
     </open-files>
 </project-private>
