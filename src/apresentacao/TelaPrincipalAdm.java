@@ -11,8 +11,10 @@ import persistencia.RepositorioProduto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
+import negocio.Fornecedor;
 import negocio.regras.RegraCadastroProduto;
 import persistencia.RepositorioCliente;
+import persistencia.RepositorioFornecedor;
 
 /**
  *
@@ -22,9 +24,11 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     RepositorioProduto produto = new RepositorioProduto();
     RepositorioCliente cliente = new RepositorioCliente();
+    RepositorioFornecedor fornecedor = new RepositorioFornecedor();
     Produto obj = new Produto();
 
-    public void atualizaTabela() {
+    public void atualizaTabelaProduto() {
+        //atualiza tabela produto
         listaProduto.clear();
         listaProduto.addAll(produto.getLista());
         int linha = listaProduto.size() - 1;
@@ -32,6 +36,37 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             tblProdutos.setRowSelectionInterval(linha, linha);
             tblProdutos.scrollRectToVisible(
                     tblProdutos.getCellRect(linha, linha, true));
+        }
+    }
+
+    public void atualizaTabelaCliente() {
+        //atualiza tabela cliente
+        listaCliente.clear();
+        try {
+            listaCliente.addAll(cliente.getLista());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro;" + ex.getMessage());
+        }
+        int linha = listaCliente.size() - 1;
+        if (linha >= 0) {
+            tblCliente.setRowSelectionInterval(linha, linha);
+            tblCliente.scrollRectToVisible(
+                    tblCliente.getCellRect(linha, linha, true));
+        }
+    }
+
+    public void atualizaTabelaFornecedor() {
+        //atualiza tabela fornecedor
+        listaFornecedor.clear();
+        try {
+            listaFornecedor.addAll(fornecedor.getLista());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro;" + ex.getMessage());
+        }
+        int linha = listaFornecedor.size() - 1;
+        if (linha >= 0) {
+            tblFornecedor.setRowSelectionInterval(linha, linha);
+            tblFornecedor.scrollRectToVisible(tblFornecedor.getCellRect(linha, linha, true));
         }
     }
 
@@ -51,7 +86,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtTotal.setEditable(editando);
         txtValor.setEditable(editando);
         txtQuantidade.setEditable(editando);
-        
+
         //trata ediçao cliente
         btnCancelarCliente.setEnabled(editando);
         btnSalvarCliente.setEnabled(editando);
@@ -68,8 +103,27 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtRg.setEditable(editando);
         txtCepCliente.setEditable(editando);
         txtCelularCliente.setEditable(editando);
+        txtUsuario.setEditable(editando);
+        txtEmailCliente.setEditable(editando);
+        txtSenha.setEditable(editando);
         
-
+        //trata ediçao fornecedor
+        btnCancelarFornecedor.setEnabled(editando);
+        btnSalvarFornecedor.setEnabled(editando);
+        btnEditarFornecedor.setEnabled(!editando);
+        btnExcluirFornecedor.setEnabled(!editando);
+        btnAddFornecedor.setEnabled(!editando);
+        txtNomeFornecedor.setEditable(editando);
+        txtBairro.setEditable(editando);
+        txtRua.setEditable(editando);
+        txtComplemento.setEditable(editando);
+        txtCidade.setEditable(editando);
+        txtCnpj.setEditable(editando);
+        txtCep.setEditable(editando);
+        txtCelularRepresentante.setEditable(editando);
+        txtNomeRepresentante.setEditable(editando);
+        txtTelefoneFornecedor.setEditable(editando);
+        
     }
 
     /**
@@ -77,7 +131,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
      */
     public TelaPrincipalAdm() {
         initComponents();
-        atualizaTabela();
+        atualizaTabelaProduto();
+        atualizaTabelaCliente();
         trataEdicao(false);
     }
 
@@ -95,6 +150,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         ;
         listaCliente = listaCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Cliente>())
         ;
+        listaFornecedor = listaFornecedor = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Fornecedor>());
         addCliente = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -128,7 +184,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtBairroCliente = new javax.swing.JTextField();
         txtNascimentoCliente = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        txtCelularCliente = new javax.swing.JTextField();
         txtComplementoCliente = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
@@ -136,41 +191,42 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         txtEmailCliente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        txtCelularCliente = new javax.swing.JTextField();
         addFornecedor = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         abasFornecedor = new javax.swing.JTabbedPane();
         abaListagemFornecedor = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblFornecedor = new javax.swing.JTable();
         abaCadastroFornecedor = new javax.swing.JPanel();
         acoesFornecedor = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnAddFornecedor = new javax.swing.JButton();
+        btnSalvarFornecedor = new javax.swing.JButton();
+        btnCancelarFornecedor = new javax.swing.JButton();
+        btnExcluirFornecedor = new javax.swing.JButton();
+        btnEditarFornecedor = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
-        txtCep2 = new javax.swing.JTextField();
+        txtCep = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JTextField();
-        txtNome3 = new javax.swing.JTextField();
+        txtNomeFornecedor = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
-        txtCidade2 = new javax.swing.JTextField();
+        txtCidade = new javax.swing.JTextField();
         txtNomeRepresentante = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
-        txtFone2 = new javax.swing.JTextField();
+        txtTelefoneFornecedor = new javax.swing.JTextField();
         txtCelularRepresentante = new javax.swing.JTextField();
-        txtComplemento2 = new javax.swing.JTextField();
+        txtComplemento = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbxUf = new javax.swing.JComboBox<>();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
-        txtBairro2 = new javax.swing.JTextField();
+        txtBairro = new javax.swing.JTextField();
         addProduto = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         abasProduto = new javax.swing.JTabbedPane();
@@ -380,9 +436,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         jLabel33.setText("Data de Nascimento");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.celular}"), txtCelularCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.complemento}"), txtComplementoCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
@@ -456,8 +509,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(txtCepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel14)
-                    .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCadastroClienteLayout.setVerticalGroup(
@@ -503,9 +556,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(txtCepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
+                .addComponent(txtCelularCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -517,7 +570,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                 .addGroup(abaCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", abaCadastroCliente);
@@ -543,28 +596,59 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         addFornecedor.setVisible(false);
         addFornecedor.getContentPane().setLayout(new javax.swing.OverlayLayout(addFornecedor.getContentPane()));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaFornecedor, tblFornecedor);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rua}"));
+        columnBinding.setColumnName("Rua");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${complemento}"));
+        columnBinding.setColumnName("Complemento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bairro}"));
+        columnBinding.setColumnName("Bairro");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cidade}"));
+        columnBinding.setColumnName("Cidade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${uf}"));
+        columnBinding.setColumnName("Uf");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cep}"));
+        columnBinding.setColumnName("Cep");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${celular}"));
+        columnBinding.setColumnName("Celular");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cnpj}"));
+        columnBinding.setColumnName("Cnpj");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeEmpresa}"));
+        columnBinding.setColumnName("Nome Empresa");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${telefoneEmpresa}"));
+        columnBinding.setColumnName("Telefone Empresa");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+
+        jScrollPane4.setViewportView(tblFornecedor);
 
         javax.swing.GroupLayout abaListagemFornecedorLayout = new javax.swing.GroupLayout(abaListagemFornecedor);
         abaListagemFornecedor.setLayout(abaListagemFornecedorLayout);
         abaListagemFornecedorLayout.setHorizontalGroup(
             abaListagemFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
         );
         abaListagemFornecedorLayout.setVerticalGroup(
             abaListagemFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+            .addGroup(abaListagemFornecedorLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         abasFornecedor.addTab("Listagem", abaListagemFornecedor);
@@ -572,24 +656,55 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         acoesFornecedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Acões"));
         acoesFornecedor.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("Adicionar");
-        acoesFornecedor.add(jButton1);
+        btnAddFornecedor.setText("Adicionar");
+        btnAddFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddFornecedorActionPerformed(evt);
+            }
+        });
+        acoesFornecedor.add(btnAddFornecedor);
 
-        jButton2.setText("Salvar");
-        acoesFornecedor.add(jButton2);
+        btnSalvarFornecedor.setText("Salvar");
+        btnSalvarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarFornecedorActionPerformed(evt);
+            }
+        });
+        acoesFornecedor.add(btnSalvarFornecedor);
 
-        jButton3.setText("Cancelar");
-        acoesFornecedor.add(jButton3);
+        btnCancelarFornecedor.setText("Cancelar");
+        btnCancelarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarFornecedorActionPerformed(evt);
+            }
+        });
+        acoesFornecedor.add(btnCancelarFornecedor);
 
-        jButton4.setText("Excluir");
-        acoesFornecedor.add(jButton4);
+        btnExcluirFornecedor.setText("Excluir");
+        btnExcluirFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirFornecedorActionPerformed(evt);
+            }
+        });
+        acoesFornecedor.add(btnExcluirFornecedor);
 
-        jButton5.setText("Editar");
-        acoesFornecedor.add(jButton5);
+        btnEditarFornecedor.setText("Editar");
+        btnEditarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarFornecedorActionPerformed(evt);
+            }
+        });
+        acoesFornecedor.add(btnEditarFornecedor);
 
         jLabel36.setText("Complemento");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cep}"), txtCep, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel37.setText("Bairro");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cnpj}"), txtCnpj, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         txtCnpj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -597,11 +712,32 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             }
         });
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeEmpresa}"), txtNomeFornecedor, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel38.setText(" Celular do Representante");
 
         jLabel13.setText("Rua");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rua}"), txtRua, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cidade}"), txtCidade, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNomeRepresentante, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         jLabel39.setText("Nome do Representante");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.telefoneEmpresa}"), txtTelefoneFornecedor, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.celular}"), txtCelularRepresentante, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.complemento}"), txtComplemento, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         jLabel40.setText("CNPJ");
 
@@ -609,13 +745,19 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         jLabel43.setText("UF");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbxUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.uf}"), cbxUf, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
         jLabel46.setText("CEP");
 
         jLabel47.setText("Nome");
 
         jLabel48.setText("Cidade");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFornecedor, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bairro}"), txtBairro, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout abaCadastroFornecedorLayout = new javax.swing.GroupLayout(abaCadastroFornecedor);
         abaCadastroFornecedor.setLayout(abaCadastroFornecedorLayout);
@@ -628,7 +770,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
                         .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(txtComplemento2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
                         .addComponent(jLabel37)
                         .addGap(82, 82, 82)
@@ -638,19 +780,19 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addComponent(jLabel46))
                     .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
-                        .addComponent(txtBairro2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(txtCidade2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(txtCep2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
                         .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(txtNomeRepresentante, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel39)
-                            .addComponent(txtNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel47))
                         .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
@@ -662,7 +804,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                                     .addComponent(jLabel36)))
                             .addGroup(abaCadastroFornecedorLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(txtFone2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtTelefoneFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel40)
                     .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -677,8 +819,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(jLabel42))
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefoneFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -698,7 +840,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtComplemento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel37)
@@ -707,11 +849,11 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
                     .addComponent(jLabel46))
                 .addGap(6, 6, 6)
                 .addGroup(abaCadastroFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBairro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCidade2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCep2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 136, Short.MAX_VALUE))
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 164, Short.MAX_VALUE))
         );
 
         abasFornecedor.addTab("Cadastro", abaCadastroFornecedor);
@@ -1138,7 +1280,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
         trataEdicao(false);
-        atualizaTabela();
+        atualizaTabelaProduto();
 
 
     }//GEN-LAST:event_btnSalvarProdutoActionPerformed
@@ -1171,7 +1313,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro");
             }
-            atualizaTabela();
+            atualizaTabelaProduto();
         }
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
 
@@ -1179,12 +1321,12 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         trataEdicao(true);
         txtQuantidade.setText("0");
         txtNome.requestFocus();
-        
+
     }//GEN-LAST:event_btnEditarProdutoActionPerformed
 
     private void btnCancelarCadastroProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCadastroProdActionPerformed
         trataEdicao(false);
-        atualizaTabela();
+        atualizaTabelaProduto();
     }//GEN-LAST:event_btnCancelarCadastroProdActionPerformed
 
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
@@ -1208,21 +1350,21 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private void btnAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClienteActionPerformed
         listaCliente.add((Cliente) new Cliente());
         int linha = listaCliente.size() - 1;
-        tblCliente.setRowSelectionInterval(linha, linha);  
+        tblCliente.setRowSelectionInterval(linha, linha);
         trataEdicao(true);
         txtNomeCliente.requestFocus();
     }//GEN-LAST:event_btnAddClienteActionPerformed
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         int linhaSelecionada = tblCliente.getSelectedRow();
-        Cliente obj = listaCliente.get(linhaSelecionada);        
+        Cliente obj = listaCliente.get(linhaSelecionada);
         try {
             cliente.salvarCliente(obj);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
-        }    
-        trataEdicao(true);
-        atualizaTabela();
+        }
+        trataEdicao(false);
+        atualizaTabelaCliente();
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
@@ -1241,7 +1383,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro");
             }
-            atualizaTabela();
+            atualizaTabelaCliente();
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
@@ -1252,7 +1394,58 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
     private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
         trataEdicao(false);
+        atualizaTabelaCliente();
     }//GEN-LAST:event_btnCancelarClienteActionPerformed
+
+    private void btnAddFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFornecedorActionPerformed
+        listaFornecedor.add((Fornecedor) new Fornecedor());
+        int linha = listaFornecedor.size() - 1;
+        tblFornecedor.setRowSelectionInterval(linha, linha);
+        trataEdicao(true);
+        txtNomeFornecedor.requestFocus();
+    }//GEN-LAST:event_btnAddFornecedorActionPerformed
+
+    private void btnSalvarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFornecedorActionPerformed
+        int linhaSelecionada = tblFornecedor.getSelectedRow();
+        Fornecedor obj = listaFornecedor.get(linhaSelecionada);
+        try {
+            fornecedor.salvarFornecedor(obj);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
+        }
+        trataEdicao(false);
+        atualizaTabelaFornecedor();
+    }//GEN-LAST:event_btnSalvarFornecedorActionPerformed
+
+    private void btnCancelarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFornecedorActionPerformed
+        trataEdicao(false);
+        atualizaTabelaFornecedor();
+    }//GEN-LAST:event_btnCancelarFornecedorActionPerformed
+
+    private void btnEditarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarFornecedorActionPerformed
+        trataEdicao(true);
+        txtNomeFornecedor.requestFocus();
+    }//GEN-LAST:event_btnEditarFornecedorActionPerformed
+
+    private void btnExcluirFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFornecedorActionPerformed
+        int opcao
+                = JOptionPane.showOptionDialog(null,
+                        "Confirma a exclusão?",
+                        "Pergunta",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null,
+                        new String[]{"Sim", "Não"}, "Sim");
+        if (opcao == 0) {
+            int linhaSelecionada = tblFornecedor.getSelectedRow();
+            Fornecedor obj = listaFornecedor.get(linhaSelecionada);
+            try {
+                fornecedor.removerFornecedor(obj);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro");
+            }
+            atualizaTabelaFornecedor();
+        }
+    }//GEN-LAST:event_btnExcluirFornecedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1316,25 +1509,25 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JInternalFrame addFornecedor;
     private javax.swing.JInternalFrame addProduto;
     private javax.swing.JButton btnAddCliente;
+    private javax.swing.JButton btnAddFornecedor;
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnCancelarCadastroProd;
     private javax.swing.JButton btnCancelarCliente;
+    private javax.swing.JButton btnCancelarFornecedor;
     private javax.swing.JButton btnEditarCliente;
+    private javax.swing.JButton btnEditarFornecedor;
     private javax.swing.JButton btnEditarProduto;
     private javax.swing.JButton btnExcluirCliente;
+    private javax.swing.JButton btnExcluirFornecedor;
     private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JButton btnSalvarCliente;
+    private javax.swing.JButton btnSalvarFornecedor;
     private javax.swing.JButton btnSalvarProduto;
     private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxMarca;
+    private javax.swing.JComboBox<String> cbxUf;
     private javax.swing.JComboBox<String> cbxUfCliente;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1375,11 +1568,11 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private java.util.List<Cliente> listaCliente;
+    private java.util.List<Fornecedor> listaFornecedor;
     private java.util.List<Produto> listaProduto;
     private javax.swing.JMenuItem mnItemCliente;
     private javax.swing.JMenuItem mnItemFornecedor;
@@ -1387,29 +1580,29 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JMenu mnItemSair;
     private javax.swing.JMenuItem mnItemSobre;
     private javax.swing.JTable tblCliente;
+    private javax.swing.JTable tblFornecedor;
     private javax.swing.JTable tblProdutos;
-    private javax.swing.JTextField txtBairro2;
+    private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtBairroCliente;
     private javax.swing.JTextField txtCelularCliente;
     private javax.swing.JTextField txtCelularRepresentante;
-    private javax.swing.JTextField txtCep2;
+    private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCepCliente;
-    private javax.swing.JTextField txtCidade2;
+    private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCidadeCliente;
     private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtComplemento2;
+    private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtComplementoCliente;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDesconto;
     private javax.swing.JTextField txtEmailCliente;
     private javax.swing.JTextField txtEstoqueAtual;
     private javax.swing.JTextField txtEstoqueMin;
-    private javax.swing.JTextField txtFone2;
     private javax.swing.JTextField txtNascimentoCliente;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNome3;
     private javax.swing.JTextField txtNomeCliente;
+    private javax.swing.JTextField txtNomeFornecedor;
     private javax.swing.JTextField txtNomeRepresentante;
     private javax.swing.JTextField txtPesquisaProduto;
     private javax.swing.JTextField txtQuantidade;
@@ -1417,6 +1610,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtRuaCliente;
     private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtTelefoneFornecedor;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtValor;

@@ -14,6 +14,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="java.util.List" name="listaFornecedor">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="listaFornecedor = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList&lt;Fornecedor&gt;())"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Fornecedor&gt;"/>
+      </AuxValues>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="MenuBarra">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MenuCadastro">
@@ -235,55 +241,42 @@
                           <BindingProperties>
                             <BindingProperty name="elements" source="listaCliente" target="tblCliente" targetPath="elements" updateStrategy="0" immediately="true">
                               <Subbinding sourcePath="${id}">
-                                <BindingParameter name="NAME" value="Id"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${nome}">
-                                <BindingParameter name="NAME" value="Nome"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${rua}">
-                                <BindingParameter name="NAME" value="Rua"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${complemento}">
-                                <BindingParameter name="NAME" value="Complemento"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${bairro}">
-                                <BindingParameter name="NAME" value="Bairro"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${cidade}">
-                                <BindingParameter name="NAME" value="Cidade"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${uf}">
-                                <BindingParameter name="NAME" value="Uf"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${cep}">
-                                <BindingParameter name="NAME" value="Cep"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${celular}">
-                                <BindingParameter name="NAME" value="Celular"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${dataNascimento}">
-                                <BindingParameter name="NAME" value="Data Nascimento"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${cpf}">
-                                <BindingParameter name="NAME" value="Cpf"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${rg}">
-                                <BindingParameter name="NAME" value="Rg"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                               <Subbinding sourcePath="${email}">
-                                <BindingParameter name="NAME" value="Email"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                               </Subbinding>
                             </BindingProperty>
@@ -371,8 +364,8 @@
                                       <Component id="txtCepCliente" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCelularCliente" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                                   <Component id="txtEmailCliente" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtCelularCliente" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -430,9 +423,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtCelularCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="txtCelularCliente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtEmailCliente" min="-2" max="-2" attributes="0"/>
@@ -446,7 +439,7 @@
                                   <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="38" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -658,13 +651,6 @@
                         <Property name="text" type="java.lang.String" value="Data de Nascimento"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCelularCliente">
-                      <BindingProperties>
-                        <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.celular}" target="txtCelularCliente" targetPath="text" updateStrategy="0" immediately="false">
-                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                        </BindingProperty>
-                      </BindingProperties>
-                    </Component>
                     <Component class="javax.swing.JTextField" name="txtComplementoCliente">
                       <BindingProperties>
                         <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.complemento}" target="txtComplementoCliente" targetPath="text" updateStrategy="0" immediately="false">
@@ -702,6 +688,8 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Email"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtCelularCliente">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -790,34 +778,67 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="606" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" alignment="0" pref="606" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="433" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="4">
-                                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                              </Table>
-                            </Property>
-                          </Properties>
+                        <Component class="javax.swing.JTable" name="tblFornecedor">
+                          <BindingProperties>
+                            <BindingProperty name="elements" source="listaFornecedor" target="tblFornecedor" targetPath="elements" updateStrategy="0" immediately="true">
+                              <Subbinding sourcePath="${id}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${nome}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${rua}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${complemento}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${bairro}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${cidade}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${uf}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${cep}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${celular}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${cnpj}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${nomeEmpresa}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                              <Subbinding sourcePath="${telefoneEmpresa}">
+                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              </Subbinding>
+                            </BindingProperty>
+                          </BindingProperties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -842,7 +863,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtRua" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                      <Component id="txtComplemento2" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtComplemento" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
@@ -854,20 +875,20 @@
                                       <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtBairro2" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="txtBairro" min="-2" pref="100" max="-2" attributes="0"/>
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                      <Component id="txtCidade2" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="txtCidade" min="-2" pref="70" max="-2" attributes="0"/>
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                      <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbxUf" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                                      <Component id="txtCep2" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="txtCep" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtNomeRepresentante" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                           <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtNome3" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                          <Component id="txtNomeFornecedor" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                                           <Component id="jLabel47" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -882,7 +903,7 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtFone2" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="txtTelefoneFornecedor" min="-2" pref="100" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -904,8 +925,8 @@
                               </Group>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNome3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtFone2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomeFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTelefoneFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel40" min="-2" pref="20" max="-2" attributes="0"/>
@@ -929,7 +950,7 @@
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtRua" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtComplemento2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtComplemento" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -940,12 +961,12 @@
                               </Group>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtBairro2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCidade2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCep2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtBairro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxUf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCep" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="136" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="164" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -965,30 +986,45 @@
                         <Property name="rows" type="int" value="1"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="jButton1">
+                        <Component class="javax.swing.JButton" name="btnAddFornecedor">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Adicionar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddFornecedorActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton2">
+                        <Component class="javax.swing.JButton" name="btnSalvarFornecedor">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Salvar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarFornecedorActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton3">
+                        <Component class="javax.swing.JButton" name="btnCancelarFornecedor">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Cancelar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarFornecedorActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton4">
+                        <Component class="javax.swing.JButton" name="btnExcluirFornecedor">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Excluir"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirFornecedorActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton5">
+                        <Component class="javax.swing.JButton" name="btnEditarFornecedor">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Editar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarFornecedorActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -997,7 +1033,12 @@
                         <Property name="text" type="java.lang.String" value="Complemento"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCep2">
+                    <Component class="javax.swing.JTextField" name="txtCep">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.cep}" target="txtCep" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel37">
                       <Properties>
@@ -1005,11 +1046,21 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtCnpj">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.cnpj}" target="txtCnpj" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCnpjActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtNome3">
+                    <Component class="javax.swing.JTextField" name="txtNomeFornecedor">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.nomeEmpresa}" target="txtNomeFornecedor" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel38">
                       <Properties>
@@ -1022,21 +1073,51 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtRua">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.rua}" target="txtRua" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCidade2">
+                    <Component class="javax.swing.JTextField" name="txtCidade">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.cidade}" target="txtCidade" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtNomeRepresentante">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.nome}" target="txtNomeRepresentante" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel39">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Nome do Representante"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtFone2">
+                    <Component class="javax.swing.JTextField" name="txtTelefoneFornecedor">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.telefoneEmpresa}" target="txtTelefoneFornecedor" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtCelularRepresentante">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.celular}" target="txtCelularRepresentante" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtComplemento2">
+                    <Component class="javax.swing.JTextField" name="txtComplemento">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.complemento}" target="txtComplemento" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel40">
                       <Properties>
@@ -1053,7 +1134,7 @@
                         <Property name="text" type="java.lang.String" value="UF"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox3">
+                    <Component class="javax.swing.JComboBox" name="cbxUf">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="27">
@@ -1087,6 +1168,9 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <BindingProperties>
+                        <BindingProperty name="selectedItem" source="tblFornecedor" sourcePath="${selectedElement.uf}" target="cbxUf" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+                      </BindingProperties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -1106,7 +1190,12 @@
                         <Property name="text" type="java.lang.String" value="Cidade"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtBairro2">
+                    <Component class="javax.swing.JTextField" name="txtBairro">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblFornecedor" sourcePath="${selectedElement.bairro}" target="txtBairro" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                   </SubComponents>
                 </Container>

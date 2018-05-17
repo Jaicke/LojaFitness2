@@ -26,7 +26,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        thelastPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("thelastPU").createEntityManager();
+        produtoQuery = java.beans.Beans.isDesignTime() ? null : thelastPUEntityManager.createQuery("SELECT p FROM Produto p");
+        produtoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtoQuery.getResultList();
         comprar = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
@@ -65,14 +69,30 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
         btnOk.setText("Ok");
 
-        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Título 1", "Título 2", "Título 3"
-            }
-        ));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, produtoList, tblProdutos);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigo}"));
+        columnBinding.setColumnName("Codigo");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${marca}"));
+        columnBinding.setColumnName("Marca");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${categoria}"));
+        columnBinding.setColumnName("Categoria");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valor}"));
+        columnBinding.setColumnName("Valor");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${desconto}"));
+        columnBinding.setColumnName("Desconto");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${total}"));
+        columnBinding.setColumnName("Total");
+        columnBinding.setColumnClass(Float.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane1.setViewportView(tblProdutos);
 
         jLabel2.setText("Código");
@@ -83,7 +103,18 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
         txtCodigo.setEditable(false);
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codigo}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         txtNome.setEditable(false);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        txtPreco.setEditable(false);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.valor}"), txtPreco, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         listSelecionados.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Produtos selecionados" };
@@ -231,6 +262,8 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        bindingGroup.bind();
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -296,12 +329,16 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JMenu menuComprar;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
+    private java.util.List<apresentacao.Produto> produtoList;
+    private javax.persistence.Query produtoQuery;
     private javax.swing.JTable tblProdutos;
+    private javax.persistence.EntityManager thelastPUEntityManager;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtTotal;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
