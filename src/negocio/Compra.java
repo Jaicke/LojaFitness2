@@ -2,16 +2,16 @@ package negocio;
 
 public class Compra {
 
-    private Produto produto;
+    private float valorTotal;
     private String dataCompra;
 
-    public Produto getProduto() {
-        return produto;
+    public float getValorTotal() {
+        return valorTotal;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
+    }    
 
     public String getDataCompra() {
         return dataCompra;
