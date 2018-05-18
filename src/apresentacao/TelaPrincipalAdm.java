@@ -9,9 +9,14 @@ import java.sql.SQLException;
 import negocio.Produto;
 import persistencia.RepositorioProduto;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
 import negocio.Fornecedor;
+import negocio.iRepositorioCliente;
+import negocio.iRepositorioFornecedor;
+import negocio.iRepositorioProduto;
 import negocio.regras.RegraCadastroProduto;
 import persistencia.RepositorioCliente;
 import persistencia.RepositorioFornecedor;
@@ -22,15 +27,19 @@ import persistencia.RepositorioFornecedor;
  */
 public class TelaPrincipalAdm extends javax.swing.JFrame {
 
-    RepositorioProduto produto = new RepositorioProduto();
-    RepositorioCliente cliente = new RepositorioCliente();
-    RepositorioFornecedor fornecedor = new RepositorioFornecedor();
+    iRepositorioProduto produto = new RepositorioProduto();
+    iRepositorioCliente cliente = new RepositorioCliente();
+    iRepositorioFornecedor fornecedor = new RepositorioFornecedor();
     Produto obj = new Produto();
 
     public void atualizaTabelaProduto() {
         //atualiza tabela produto
         listaProduto.clear();
-        listaProduto.addAll(produto.getLista());
+        try {
+            listaProduto.addAll(produto.getLista());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro" +ex.getMessage());
+        }
         int linha = listaProduto.size() - 1;
         if (linha >= 0) {
             tblProdutos.setRowSelectionInterval(linha, linha);
@@ -133,6 +142,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         initComponents();
         atualizaTabelaProduto();
         atualizaTabelaCliente();
+        atualizaTabelaFornecedor();
         trataEdicao(false);
     }
 
@@ -428,6 +438,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         jLabel32.setText("Cidade");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.usuario}"), txtUsuario, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.bairro}"), txtBairroCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
@@ -442,6 +455,9 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         jLabel34.setText("CPF");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rg}"), txtRg, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.senha}"), txtSenha, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         jLabel35.setText("Usuário");
@@ -590,7 +606,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         getContentPane().add(addCliente);
 
-        addFornecedor.setBorder(null);
         addFornecedor.setTitle("Fornecedor");
         addFornecedor.setPreferredSize(new java.awt.Dimension(611, 516));
         addFornecedor.setVisible(false);
@@ -873,7 +888,6 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         getContentPane().add(addFornecedor);
 
-        addProduto.setBorder(null);
         addProduto.setResizable(true);
         addProduto.setTitle("Produto");
         addProduto.setVisible(false);
