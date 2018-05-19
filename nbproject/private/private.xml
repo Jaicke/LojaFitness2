@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/regras/RegraLogin.java</file>
             <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/Compra.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/regras/RegraCompra.java</file>
             <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/persistencia/RepositorioCliente.java</file>
             <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/negocio/iRepositorioCliente.java</file>
             <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaLogin.java</file>
+            <file>file:/C:/Users/EDVALDO/Documents/GitHub/LojaFitness2/src/apresentacao/TelaPrincipalCliente.java</file>
         </group>
     </open-files>
 </project-private>

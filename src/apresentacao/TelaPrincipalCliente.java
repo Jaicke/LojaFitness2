@@ -5,9 +5,6 @@
  */
 package apresentacao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import negocio.regras.RegraCompra;
 import negocio.Produto;
 
@@ -16,6 +13,8 @@ import negocio.Produto;
  * @author EDVALDO
  */
 public class TelaPrincipalCliente extends javax.swing.JFrame {
+
+    float total = 0;
 
     /**
      * Creates new form TelaPrincipalCliente
@@ -311,21 +310,16 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
 
-
         RegraCompra regra = new RegraCompra();
         Produto p = new Produto();
-        
+
         p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         p.setValorTotal(Float.parseFloat(txtPreco.getText()));
-        System.out.println(p.getQuantidade());
-        System.out.println(p.getValorTotal());
-        float total = 0 ; 
+
         total += regra.addProduto(p);
-        
-        System.out.println(total);
-        String t = Float.toString(total);      
-        
-        
+
+        String t = Float.toString(total);
+
         txtTotal.setText(t);
 
     }//GEN-LAST:event_btnAddProdutoActionPerformed
