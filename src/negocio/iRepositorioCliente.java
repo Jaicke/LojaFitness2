@@ -13,5 +13,6 @@ public interface iRepositorioCliente {
     public boolean removerCliente(Cliente cliente) throws SQLException;
     public boolean editarCliente(Cliente cliente) throws SQLException;
     public boolean salvarCliente(Cliente cliente) throws SQLException;
+    public void logarCliente(Login login) throws SQLException;
     
 }

@@ -631,6 +631,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtUsuario">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.usuario}" target="txtUsuario" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtBairroCliente">
                       <BindingProperties>
@@ -671,6 +676,11 @@
                       </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="txtSenha">
+                      <BindingProperties>
+                        <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.senha}" target="txtSenha" targetPath="text" updateStrategy="0" immediately="false">
+                          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                        </BindingProperty>
+                      </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel35">
                       <Properties>

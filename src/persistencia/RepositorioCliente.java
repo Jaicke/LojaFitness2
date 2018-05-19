@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
+import negocio.Login;
 import negocio.iRepositorioCliente;
 
 /**
@@ -28,7 +29,7 @@ public class RepositorioCliente implements iRepositorioCliente {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Cliente obj = new Cliente(); 
+                Cliente obj = new Cliente();
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRua(rs.getString("rua"));
@@ -42,6 +43,8 @@ public class RepositorioCliente implements iRepositorioCliente {
                 obj.setCpf(rs.getString("cpf"));
                 obj.setRg(rs.getString("rg"));
                 obj.setEmail(rs.getString("email"));
+                obj.setUsuario(rs.getString("usuario"));
+                obj.setSenha(rs.getString("senha"));
                 lista.add(obj);
             }
         } catch (SQLException e) {
@@ -52,8 +55,8 @@ public class RepositorioCliente implements iRepositorioCliente {
 
     @Override
     public boolean cadastrarCliente(Cliente cliente) throws SQLException {
-        String sql = "insert into cliente(nome, rua, complemento, bairro, cidade, uf, cep, celular, data_nascimento, cpf, rg, email)"
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into cliente(nome, rua, complemento, bairro, cidade, uf, cep, celular, data_nascimento, cpf, rg, email, usuario, senha)"
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
 
@@ -69,6 +72,8 @@ public class RepositorioCliente implements iRepositorioCliente {
             pst.setString(10, cliente.getCpf());
             pst.setString(11, cliente.getRg());
             pst.setString(12, cliente.getEmail());
+            pst.setString(13, cliente.getUsuario());
+            pst.setString(14, cliente.getSenha());
             if (pst.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Cliente Cadastrado com êxito");
                 return true;
@@ -104,7 +109,7 @@ public class RepositorioCliente implements iRepositorioCliente {
 
     @Override
     public boolean editarCliente(Cliente cliente) throws SQLException {
-        String sql = "update cliente set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, data_nascimento = ?, cpf = ?, rg = ?, email = ? where id = ?";
+        String sql = "update cliente set nome = ?, rua = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, celular = ?, data_nascimento = ?, cpf = ?, rg = ?, email = ?, usuario = ?, senha = ? where id = ?";
 
         try {
             PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
@@ -120,7 +125,9 @@ public class RepositorioCliente implements iRepositorioCliente {
             pst.setString(10, cliente.getCpf());
             pst.setString(11, cliente.getRg());
             pst.setString(12, cliente.getEmail());
-            pst.setInt(13, cliente.getId());
+            pst.setString(13, cliente.getUsuario());
+            pst.setString(14, cliente.getSenha());
+            pst.setInt(15, cliente.getId());
             if (pst.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Cliente Alterado com êxito");
                 return true;
@@ -142,6 +149,31 @@ public class RepositorioCliente implements iRepositorioCliente {
             editarCliente(cliente);
         }
         return false;
+
+    }
+
+    @Override
+    public void logarCliente(Login login) throws SQLException {
+
+        String sql = "Select senha from cliente where usuario = '" + login.getUsuario() + "';";
+        PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
+        ResultSet rs = pst.executeQuery(sql);
+        try{
+            while (rs.next()) {               
+                
+                 if (login.getUsuario().equals(rs.getString("usuario")) && login.getSenha().equals(rs.getString("senha"))) {
+                    
+                    JOptionPane.showMessageDialog(null, "Bem vindo");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Senha errada");
+                }
+                
+            }
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro" + ex.getMessage());
+            
+        }
     }
 
 }

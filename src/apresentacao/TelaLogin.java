@@ -6,6 +6,9 @@
 package apresentacao;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import negocio.Login;
@@ -108,7 +111,7 @@ public class TelaLogin extends javax.swing.JDialog {
 
         if (cbxTipo.getSelectedItem().toString().equals("Administrador")) {
             try {
-                login.setAdm(true);//setando pra regra que é login de adm
+                login.setAdm(true);//setando pra regra que é login de adm                
                 regra.efetuarLogin(login);                
                 dispose();
                 TelaPrincipalAdm tela = new TelaPrincipalAdm();
@@ -118,6 +121,8 @@ public class TelaLogin extends javax.swing.JDialog {
                 txtUsuario.setBorder(new LineBorder(Color.red));
                 txtSenha.setBorder(new LineBorder(Color.red));
                 txtUsuario.requestFocus();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else if (cbxTipo.getSelectedItem().toString().equals("Cliente")) {
@@ -128,6 +133,8 @@ public class TelaLogin extends javax.swing.JDialog {
                 new TelaPrincipalCliente().setVisible(true);
             }catch(LoginException e){
                 JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválido");
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
