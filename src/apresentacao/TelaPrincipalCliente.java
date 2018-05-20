@@ -163,10 +163,7 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
 
         tblSelecionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "Preço"
@@ -180,10 +177,6 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtNome, org.jdesktop.beansbinding.ObjectProperty.create(), tblSelecionados, org.jdesktop.beansbinding.BeanProperty.create("elements"));
-        bindingGroup.addBinding(binding);
-        binding.bind();
         jScrollPane3.setViewportView(tblSelecionados);
         if (tblSelecionados.getColumnModel().getColumnCount() > 0) {
             tblSelecionados.getColumnModel().getColumn(0).setResizable(false);
@@ -266,7 +259,7 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                 .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFinalizar)
@@ -321,7 +314,8 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         String t = Float.toString(total);
 
         txtTotal.setText(t);
-
+        
+        
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
