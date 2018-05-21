@@ -23,9 +23,10 @@ public class RegraCompra {
         return total;
 
     }
-    public float geraParcela(float total, int nParcela ){
-       float valorParcelado = total/nParcela;
-       return valorParcelado;
+
+    public float geraParcela(float total, int nParcela) {
+        float valorParcelado = total / nParcela;
+        return valorParcelado;
     }
-    
+
 }

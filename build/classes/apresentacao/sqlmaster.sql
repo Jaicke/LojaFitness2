@@ -109,6 +109,6 @@ insert into produto (nome,marca, categoria,quantidade,estoqueMinimo,estoqueAtual
                           ('Camiseta Oxer Cord II','Oxer','Feminino', '20','10','20','29.99','5','28.50' ),
                           ('Tênis Oxer Agill','Oxer','Feminino', '20','10','20', '59.99', '5', '56.99'),
                           ('Creatina Integralmedica - 300g', 'Integralmedica', 'Suplemento', '20','10','20','37.90', '2','37.15'),
-                          ('Whey Protein Integralmediga nutri - Chocolate - 1.8Kg','Integralmedica','Suplemento', '20','10','20','79.85','3','77.45'),
-                          ('Pré Treino BodyAction - Uva com Blueberry - 100g','Integralmedica','Suplemento','20','10','20','50','3','48.50'),
+                          ('Whey Protein Integralmediga-Chocolate-1.8Kg','Integralmedica','Suplemento', '20','10','20','79.85','3','77.45'),
+                          ('Pré Treino BodyAction-Uva com Blueberry-100g','Integralmedica','Suplemento','20','10','20','50','3','48.50'),
                           ('Energético - Sabor Guaraná e Açaí','Porbiótica','Suplemento','20','10','20','3','0','3' );

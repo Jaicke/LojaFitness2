@@ -284,11 +284,11 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblSelecionados);
-
-        jLabel6.setText("Escolha a Forma de Pagamento");
-
-        cbxFormas1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "À Vista", "Carnê" }));
+        jScrollPane3.setViewportView(tblSelecionados);
+        if (tblSelecionados.getColumnModel().getColumnCount() > 0) {
+            tblSelecionados.getColumnModel().getColumn(0).setResizable(false);
+            tblSelecionados.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout comprarLayout = new javax.swing.GroupLayout(comprar.getContentPane());
         comprar.getContentPane().setLayout(comprarLayout);
@@ -353,6 +353,15 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
                         .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(removerProduto)
                             .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(comprarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -419,11 +428,8 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
         String t = Float.toString(total);
 
         txtTotal.setText(t);
-
-        DefaultTableModel dtm = (DefaultTableModel) tblSelecionados.getModel();
-        dtm.addRow(new Object[]{txtNome.getText(), txtPreco.getText()});
-
-
+        
+        
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
