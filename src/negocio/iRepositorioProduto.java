@@ -13,4 +13,5 @@ public interface iRepositorioProduto {
     public boolean removerProduto(Produto produto) throws SQLException;
     public boolean editarProduto(Produto produto) throws SQLException;
     public boolean salvarProduto(Produto produto) throws SQLException;
+    public Produto localizarProduto(String nome) throws SQLException;
 }

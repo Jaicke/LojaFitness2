@@ -6,6 +6,7 @@
 package negocio.regras;
 
 import negocio.Produto;
+import negocio.excecoes.CadastroProdutoException;
 
 /**
  *
@@ -23,6 +24,11 @@ public class RegraCadastroProduto {
         }else{
             produto.setValorTotal(produto.getValor());//caso o desconto seja zero, considerar o valor base
         }
-    }   
+    }
+    public void campoVazio(Produto produto) throws CadastroProdutoException{
+        if(produto.getNome().equals("") || produto.getValorTotal() == 0.0){
+            throw new CadastroProdutoException("Nome ou Preço inválido");
+        }
+    }
     
 }

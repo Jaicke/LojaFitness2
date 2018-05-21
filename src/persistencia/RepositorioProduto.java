@@ -129,12 +129,12 @@ public class RepositorioProduto implements iRepositorioProduto {
         return false;
     }
     
-    public Produto localizarProduto(Integer codigo){
-        String sql="select * from produto where codigo = ? ";
+    @Override
+    public Produto localizarProduto(String nome) throws SQLException{
+        String sql="select * from produto where nome like '%"+ nome + "%';";
         Produto obj = new Produto();
         try{
-            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
-            pst.setInt(1, codigo);
+            PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);            
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 obj.setCodigo(rs.getInt("codigo"));

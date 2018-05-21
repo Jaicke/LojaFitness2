@@ -155,13 +155,13 @@ public class RepositorioCliente implements iRepositorioCliente {
     @Override
     public void logarCliente(Login login) throws SQLException {
 
-        String sql = "Select senha from cliente where usuario = '" + login.getUsuario() + "';";
+        String sql = "Select usuario from cliente where senha = '"+ login.getSenha()+ "';";
         PreparedStatement pst = ConexaoBanco.getPreparedStatement(sql);
         ResultSet rs = pst.executeQuery(sql);
         try{
             while (rs.next()) {               
                 
-                 if (login.getUsuario().equals(rs.getString("usuario")) && login.getSenha().equals(rs.getString("senha"))) {
+                if (login.getUsuario().equals(rs.getString("usuario")) && login.getSenha().equals(rs.getString("senha"))) {
                     
                     JOptionPane.showMessageDialog(null, "Bem vindo");
                 } else {
