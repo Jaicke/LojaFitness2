@@ -5,14 +5,31 @@
  */
 package negocio.regras;
 
+import java.sql.SQLException;
+import java.util.List;
 import negocio.Produto;
 import negocio.excecoes.CadastroProdutoException;
+import negocio.iRepositorioProduto;
+import persistencia.RepositorioProduto;
 
 /**
  *
  * @author EDVALDO
  */
-public class RegraCadastroProduto {
+public class RegraProduto {
+    iRepositorioProduto produto = new RepositorioProduto();
+    
+    public List getLista() throws SQLException{
+        return produto.getLista();        
+    }
+    
+    public boolean removerProduto(Produto p) throws SQLException{
+        return produto.removerProduto(p);
+    }
+    
+    public boolean salvarProduto(Produto p) throws SQLException{
+        return produto.salvarProduto(p);
+    }
 
     public void somaEstoque(Produto produto) {
         produto.setEstoqueAtual(produto.getEstoqueAtual() + produto.getQuantidade());
@@ -25,10 +42,6 @@ public class RegraCadastroProduto {
             produto.setValorTotal(produto.getValor());//caso o desconto seja zero, considerar o valor base
         }
     }
-    public void campoVazio(Produto produto) throws CadastroProdutoException{
-        if(produto.getNome().equals("") || produto.getValorTotal() == 0.0){
-            throw new CadastroProdutoException("Nome ou Preço inválido");
-        }
-    }
+    
     
 }

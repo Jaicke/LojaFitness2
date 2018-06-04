@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;apresentacao.Produto&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;MySQL.Produto&gt;"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JDialog" name="telaCartaoCredito">

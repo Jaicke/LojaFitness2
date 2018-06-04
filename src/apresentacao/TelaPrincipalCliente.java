@@ -551,7 +551,7 @@ public class TelaPrincipalCliente extends javax.swing.JFrame {
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuComprar;
     private javax.swing.JMenu menuSair;
-    private java.util.List<apresentacao.Produto> produtoList;
+    private java.util.List<MySQL.Produto> produtoList;
     private javax.persistence.Query produtoQuery;
     private javax.swing.JButton removerProduto;
     private javax.swing.JTable tblProdutos;

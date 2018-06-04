@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,20 +7,14 @@ package apresentacao;
 
 import java.sql.SQLException;
 import negocio.Produto;
-import persistencia.RepositorioProduto;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.Cliente;
 import negocio.Fornecedor;
 import negocio.excecoes.CadastroProdutoException;
-import negocio.iRepositorioCliente;
-import negocio.iRepositorioFornecedor;
-import negocio.iRepositorioProduto;
-import negocio.regras.RegraCadastroProduto;
-import persistencia.RepositorioCliente;
-import persistencia.RepositorioFornecedor;
+import negocio.regras.RegraCliente;
+import negocio.regras.RegraFornecedor;
+import negocio.regras.RegraProduto;
 
 /**
  *
@@ -28,18 +22,18 @@ import persistencia.RepositorioFornecedor;
  */
 public class TelaPrincipalAdm extends javax.swing.JFrame {
 
-    iRepositorioProduto produto = new RepositorioProduto();
-    iRepositorioCliente cliente = new RepositorioCliente();
-    iRepositorioFornecedor fornecedor = new RepositorioFornecedor();
+    RegraProduto regra = new RegraProduto();
+    RegraCliente regraC = new RegraCliente();
+    RegraFornecedor regraF = new RegraFornecedor();
     Produto obj = new Produto();
 
     public void atualizaTabelaProduto() {
         //atualiza tabela produto
         listaProduto.clear();
         try {
-            listaProduto.addAll(produto.getLista());
+            listaProduto.addAll(regra.getLista());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro" +ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro" + ex.getMessage());
         }
         int linha = listaProduto.size() - 1;
         if (linha >= 0) {
@@ -53,7 +47,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         //atualiza tabela cliente
         listaCliente.clear();
         try {
-            listaCliente.addAll(cliente.getLista());
+            listaCliente.addAll(regraC.getLista());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro;" + ex.getMessage());
         }
@@ -69,7 +63,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         //atualiza tabela fornecedor
         listaFornecedor.clear();
         try {
-            listaFornecedor.addAll(fornecedor.getLista());
+            listaFornecedor.addAll(regraF.getLista());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro;" + ex.getMessage());
         }
@@ -116,7 +110,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtUsuario.setEditable(editando);
         txtEmailCliente.setEditable(editando);
         txtSenha.setEditable(editando);
-        
+
         //trata ediçao fornecedor
         btnCancelarFornecedor.setEnabled(editando);
         btnSalvarFornecedor.setEnabled(editando);
@@ -133,7 +127,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         txtCelularRepresentante.setEditable(editando);
         txtNomeRepresentante.setEditable(editando);
         txtTelefoneFornecedor.setEditable(editando);
-        
+
     }
 
     /**
@@ -1269,18 +1263,21 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnItemProdutoActionPerformed
 
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
-        RegraCadastroProduto regra = new RegraCadastroProduto();
+        RegraProduto regra = new RegraProduto();
         int linhaSelecionada = tblProdutos.getSelectedRow();
         Produto obj = listaProduto.get(linhaSelecionada);
         regra.calculaValorTotal(obj);
-        regra.somaEstoque(obj);        
+        regra.somaEstoque(obj);
         try {
-            regra.campoVazio(obj);
-            produto.salvarProduto(obj);
+            regra.salvarProduto(obj);
+            if(obj.getCodigo() == null){
+                JOptionPane.showMessageDialog(null, "Produto Cadastrado com êxito");
+            }else{
+                JOptionPane.showMessageDialog(null, "Produto Alterado com êxito");
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
-        } catch (CadastroProdutoException ex) { 
-            JOptionPane.showMessageDialog(null, "Erro" + ex.getMessage());
         }
         trataEdicao(false);
         atualizaTabelaProduto();
@@ -1312,7 +1309,8 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             int linhaSelecionada = tblProdutos.getSelectedRow();
             Produto obj = listaProduto.get(linhaSelecionada);
             try {
-                produto.removerProduto(obj);
+                regra.removerProduto(obj);
+                JOptionPane.showMessageDialog(null, "Produto deletado com êxito");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro");
             }
@@ -1350,7 +1348,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         int linhaSelecionada = tblCliente.getSelectedRow();
         Cliente obj = listaCliente.get(linhaSelecionada);
         try {
-            cliente.salvarCliente(obj);
+            regraC.salvarCliente(obj);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
@@ -1370,7 +1368,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             int linhaSelecionada = tblCliente.getSelectedRow();
             Cliente obj = listaCliente.get(linhaSelecionada);
             try {
-                cliente.removerCliente(obj);
+                regraC.removerCliente(obj);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro");
             }
@@ -1400,7 +1398,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         int linhaSelecionada = tblFornecedor.getSelectedRow();
         Fornecedor obj = listaFornecedor.get(linhaSelecionada);
         try {
-            fornecedor.salvarFornecedor(obj);
+            regraF.salvarFornecedor(obj);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
         }
@@ -1430,7 +1428,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             int linhaSelecionada = tblFornecedor.getSelectedRow();
             Fornecedor obj = listaFornecedor.get(linhaSelecionada);
             try {
-                fornecedor.removerFornecedor(obj);
+                regraF.removerFornecedor(obj);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro");
             }
