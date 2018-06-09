@@ -945,7 +945,7 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
         abaListagemProduto.setLayout(abaListagemProdutoLayout);
         abaListagemProdutoLayout.setHorizontalGroup(
             abaListagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
         );
         abaListagemProdutoLayout.setVerticalGroup(
             abaListagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -986,6 +986,12 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProdutos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.estoqueAtual}"), txtEstoqueAtual, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        txtEstoqueAtual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstoqueAtualActionPerformed(evt);
+            }
+        });
 
         cbxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adidas", "Nike", "Oxer", "Integral Médica", "Probiótica" }));
 
@@ -1435,6 +1441,10 @@ public class TelaPrincipalAdm extends javax.swing.JFrame {
             atualizaTabelaFornecedor();
         }
     }//GEN-LAST:event_btnExcluirFornecedorActionPerformed
+
+    private void txtEstoqueAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstoqueAtualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEstoqueAtualActionPerformed
 
     /**
      * @param args the command line arguments
